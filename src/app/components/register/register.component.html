@@ -1,0 +1,90 @@
+<div class="register-cont">
+    <mat-card class="example-card mat-elevation-z10">
+      <mat-card-header>
+        <mat-card-title>Registruj se</mat-card-title>
+        <mat-card-subtitle>Imaš nalog? <span class="nav-text" (click)="navigate()">Prijavi se</span></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <form class="form-items">
+          <div class="row-div">
+            <mat-form-field appearance="outline">
+              <mat-label>Ime</mat-label>
+              <input
+                type="text"
+                name="name"
+                matInput
+                formControl="firstName"
+                required
+                placeholder="Ime"
+              />
+              <mat-error *ngIf="firstName.invalid"> Unesite ime. </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="row-item">
+              <mat-label>Prezime</mat-label>
+              <input
+                type="text"
+                name="lastName"
+                formControl="lastName"
+                required
+                matInput
+                placeholder="Prezime"
+              />
+              <mat-error *ngIf="lastName.invalid"> Unesite prezime. </mat-error>
+            </mat-form-field>
+          </div>
+          <mat-form-field appearance="outline">
+            <mat-label>Email Adresa</mat-label>
+            <input
+              type="email"
+              name="email"
+              matInput
+              placeholder="vašemail@gmail.com"
+              formControl="email"
+              required
+            />
+            <mat-icon matSuffix color="primary">mail</mat-icon>
+            <mat-error *ngIf="email.invalid">{{
+              email.hasError("required")
+                ? "Unesite email adresu."
+                : email.hasError("email")
+                ? "Email adresa nije validnog formata"
+                : ""
+            }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Lozinka</mat-label>
+            <mat-icon matSuffix color="primary">password</mat-icon>
+            <input
+              type="password"
+              name="password"
+              formControl="password"
+              matInput
+              required
+              placeholder="******"
+            />
+            <mat-error *ngIf="password.invalid">
+              Lozinka ne sme biti kraća od 6 karaktera.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Broj telefona</mat-label>
+            <input
+              type="text"
+              name="phone"
+              matInput
+              formControl="phone"
+              required
+              placeholder="+381"
+            />
+            <mat-error *ngIf="phone.invalid"> Unesite broj telefona. </mat-error>
+          </mat-form-field>
+          <button mat-raised-button disabled="{{ loading }}" color="primary" class="btn">
+            Registruj se
+          </button>
+        </form>
+      </mat-card-content>
+      <mat-card-footer>
+        <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+      </mat-card-footer>
+    </mat-card>
+  </div>

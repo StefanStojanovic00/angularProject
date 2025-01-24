@@ -2,7 +2,7 @@
     <mat-card class="example-card mat-elevation-z10">
       <mat-card-header>
         <mat-card-title>Prijavi se</mat-card-title>
-        <mat-card-subtitle>Nemaš nalog? Registruj se</mat-card-subtitle>
+        <mat-card-subtitle>Nemaš nalog? <span class="nav-text" (click)="navigate()">Registruj se</span></mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <form class="form-items">
@@ -11,7 +11,7 @@
             <input
               type="text"
               name="email"
-              formControlName="email"
+              formControl="email"
               matInput
               placeholder="vašemail@gmail.com"
             />
@@ -23,12 +23,13 @@
             <input
               type="password"
               name="password"
-              formControlName="password"
+              formControl="password"
               matInput
               placeholder="******"
             />
+            <mat-error *ngIf="password.invalid"> Unesite lozinku. </mat-error>
           </mat-form-field>
-          <button class="btn" mat-raised-button color="primary" (click)="handleSubmit()">
+          <button class="btn" mat-raised-button color="primary" disabled="{{ loading }}" (click)="handleSubmit()">
             Prijavi se
           </button>
         </form>

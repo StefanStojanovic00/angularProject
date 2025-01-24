@@ -1,22 +1,27 @@
-.login-cont {
+.register-cont {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: calc(100% - 50px);
-   
+    height: calc(100% - 64px);
 }
 .form-items {
     display: flex;
     flex-direction: column;
 }
-.btn{
-    margin: 10%;
+.row-div {
+    display: flex;
 }
-
+.row-item {
+    margin-left: 10px;
+}
 .nav-text {
     font-weight: 500;
-    color: #005cbb;
+    color: #3F51B5;
     cursor: pointer;
+}
+
+.btn{
+    margin: 10%;
 }

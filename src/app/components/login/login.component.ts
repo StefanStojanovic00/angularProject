@@ -9,6 +9,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {NgIf} from '@angular/common';
+import { FormControl, Validators } from '@angular/forms';
+import {  Router } from '@angular/router';
 
 
 
@@ -19,32 +21,37 @@ import {NgIf} from '@angular/common';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit{
-  email: string ="mail@mail.com";
-  password: string = "123";
+
+  email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required]);
   loading: boolean =false;
   
- constructor(private store: Store<AppState>)
+ constructor(private store: Store<AppState>, private router:Router)
   {}
 
   ngOnInit(): void {
+    this.store.subscribe((state)=>
+    {
+      if(this.loading)
+      this.loading=state.user.loading;
+    })
     
   }
 
   handleSubmit()
   {
-    if(!this.email || !this.password) return;
+    if(!this.email.value || !this.password.value) return;
 
     this.store.dispatch(
       loginUser({
-        email:this.email,
-        password:this.password,
+        email:this.email.value,
+        password:this.password.value,
       })
     );
-    this.resetInputFields();
   };
-  resetInputFields() {
-    this.email = '';
-    this.password = '';
-  }
+
+  navigate() {
+    this.router.navigate(['register']);
+    }
   
 }

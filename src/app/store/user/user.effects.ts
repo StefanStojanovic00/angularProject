@@ -4,6 +4,8 @@ import { mergeMap, map, catchError, of } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import * as UserActions from './user.actions';
 import { LoginUser } from '../../models/user';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 /*
 comment why use inject insted constructor :D
@@ -18,20 +20,27 @@ export class UserEffects {
   //constructor(private actions: Actions, private userService: UserService) {}
   userService = inject(UserService); 
   actions$=inject(Actions);
+  snackBar=inject(MatSnackBar);
+  router=inject(Router);
+
   loginUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActions.loginUser),
       mergeMap(({ email, password }) =>
         this.userService.login(email, password).pipe(
-          map((res) => {
-            if (res.user ) return res;
-            else throw new Error('Ne valja');
-          }),
-          map((data: LoginUser) => {
+          map((data:LoginUser) => {
+            localStorage.setItem('token', data.access_token);
+            this.router.navigate(['home']);
+
             return UserActions.loginSuccess({ data });
           }),
           catchError(() => {
-            return of({ type: 'eror' });
+            this.snackBar.open(
+              'Email adresa ili lozinka nisu validni.',
+              'Zatvori',
+              { duration: 5000 }
+            );
+            return of(UserActions.loginFailure({ error: 'BadCredentials' }));
           })
         )
       )

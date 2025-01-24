@@ -6,11 +6,13 @@ import * as UserActions from './user.actions';
 export interface UserState{
     user: User |null;
     access_token:string;
+    loading: boolean;
 }
 
 export const initialStateL:UserState={
     user:null,
     access_token:'',
+    loading:false
 };
 
 export const userReducer=createReducer(
@@ -19,5 +21,16 @@ export const userReducer=createReducer(
         ...state,
         user: action.data.user,
         access_token: action.data.access_token,
-      }))
+        loading:false
+      })),
+    on(UserActions.loginUser,(state,action)=>({
+        ...state,
+        loading:true,
+    })),
+    on(UserActions.loginFailure,(state,action)=>({
+        user:null,
+        access_token:'',
+        loading:false
+    }))
 );
+
