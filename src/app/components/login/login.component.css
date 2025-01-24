@@ -1,0 +1,16 @@
+.login-cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(100% - 50px);
+   
+}
+.form-items {
+    display: flex;
+    flex-direction: column;
+}
+.btn{
+    margin: 10%;
+}
