@@ -1,11 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mergeMap, map, catchError, of } from 'rxjs';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../services/user/user.service';
 import * as UserActions from './user.actions';
 import { LoginUser } from '../../models/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { setToken, SetUser } from '../../auth/user-context';
 
 /*
 comment why use inject insted constructor :D
@@ -29,8 +30,10 @@ export class UserEffects {
       mergeMap(({ email, password }) =>
         this.userService.login(email, password).pipe(
           map((data:LoginUser) => {
-            localStorage.setItem('token', data.access_token);
-            this.router.navigate(['home']);
+            setToken(data.access_token);
+            SetUser(data.user);
+
+            this.router.navigate(['home'],{ replaceUrl:true});
 
             return UserActions.loginSuccess({ data });
           }),
@@ -46,4 +49,43 @@ export class UserEffects {
       )
     )
   );
+
+
+  logOutUser$=createEffect(()=>
+  this.actions$.pipe(ofType(UserActions.logoutUser),
+    mergeMap(()=>{
+      setToken(null);
+      SetUser(null);
+      return of(({type:'logged out'}))
+    })));
+
+    registerUser$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(UserActions.registerUser),
+        mergeMap((action) =>
+          this.userService.register(action.registerData).pipe(
+            map(() => {
+              this.snackBar.open('Uspešno registrovanje.', 'OK');
+              this.router.navigate(['login'], { replaceUrl: true });
+              return UserActions.registerSuccess();
+            }),
+            catchError(({ error }) => {
+              this.snackBar.open(
+                error.message === 'MissingFields'
+                  ? 'Popunite sva polja.'
+                  : error.message === 'EmailAlreadyExist'
+                  ? 'Već postoji registrovan nalog sa tom email adresom.'
+                  : 'Greška na strani servera',
+                'Zatvori',
+                { duration: 5000 }
+              );
+              return of(UserActions.registerFailure());
+            })
+          )
+        )
+      )
+    );
+
+
+
 }

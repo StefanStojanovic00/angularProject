@@ -78,7 +78,7 @@
             />
             <mat-error *ngIf="phone.invalid"> Unesite broj telefona. </mat-error>
           </mat-form-field>
-          <button mat-raised-button disabled="{{ loading }}" color="primary" class="btn">
+          <button mat-raised-button disabled="{{ loading }}" color="primary" class="btn" (click)="handleSubmit()">
             Registruj se
           </button>
         </form>

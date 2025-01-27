@@ -50,8 +50,8 @@ export class LoginComponent implements OnInit{
     );
   };
 
-  navigate() {
-    this.router.navigate(['register']);
+  navigate(path:string) {
+    this.router.navigate([path]);
     }
   
 }

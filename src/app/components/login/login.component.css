@@ -20,3 +20,10 @@
     color: #005cbb;
     cursor: pointer;
 }
+
+.nav-text-small {
+    margin-top: 10px;
+    text-align: center;
+    color: #3F51B5;
+    cursor: pointer;
+}

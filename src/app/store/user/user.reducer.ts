@@ -31,6 +31,30 @@ export const userReducer=createReducer(
         user:null,
         access_token:'',
         loading:false
-    }))
+    })),
+    on(UserActions.logoutUser, ()=>({
+        user:null,
+        access_token:'',
+        loading:false
+    })),
+    on(UserActions.loginFailure, ()=>(
+        {
+            user:null,
+            access_token:'',
+            loading:false,
+        }
+    )),
+    on(UserActions.registerSuccess, (state)=>({
+        ...state,
+        loading:true
+    })),
+    on(UserActions.registerSuccess, (state) => ({
+        ...state,
+        loading: false,
+      })),
+      on(UserActions.registerFailure, (state) => ({
+        ...state,
+        loading: false,
+      }))
 );
 

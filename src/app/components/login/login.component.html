@@ -2,7 +2,7 @@
     <mat-card class="example-card mat-elevation-z10">
       <mat-card-header>
         <mat-card-title>Prijavi se</mat-card-title>
-        <mat-card-subtitle>Nemaš nalog? <span class="nav-text" (click)="navigate()">Registruj se</span></mat-card-subtitle>
+        <mat-card-subtitle>Nemaš nalog? <span class="nav-text" (click)="navigate('register')">Registruj se</span></mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <form class="form-items">
@@ -32,6 +32,8 @@
           <button class="btn" mat-raised-button color="primary" disabled="{{ loading }}" (click)="handleSubmit()">
             Prijavi se
           </button>
+          <span class="nav-text-small" (click)="navigate('home')"
+        >Nastavi bez prijave</span>
         </form>
       </mat-card-content>
       <mat-card-footer>

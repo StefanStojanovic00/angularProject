@@ -1,15 +1,50 @@
 import { Component } from '@angular/core';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { NgFor, NgIf } from '@angular/common';
+import { User } from '../../models/user';
+import { AppState } from '../../app.state';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { loadCategories } from '../../store/category/category.action';
+import { logoutUser } from '../../store/user/user.actions';
+import { Category } from '../../models/category';
+
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [MatToolbarModule, MatMenuModule,NgIf,NgFor],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
 
-  constructor(){}
 
-  ngOnInit():void{}
+  user:User | null=null;
+  categories: Category[]=[];
 
+
+
+
+  constructor(private store:Store<AppState>,private router:Router){}
+
+  ngOnInit():void{
+    this.store.dispatch(loadCategories())
+    this.store.subscribe((state)=>
+    {
+      this.user=state.user.user;
+    });
+    this.store.subscribe((state)=>
+    {
+      this.categories=state.category.categories;
+    })
+  }
+
+  handleLog() {
+    if(this.user)
+    {
+      this.store.dispatch(logoutUser());
+    }
+      this.router.navigate(['login']);
+    }
 }
