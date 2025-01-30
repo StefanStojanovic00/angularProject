@@ -10,15 +10,19 @@ import { loginUser } from './store/user/user.actions';
 import { UserEffects } from './store/user/user.effects';
 import { provideEffects } from '@ngrx/effects'; 
 import {  HttpFeatureKind, provideHttpClient } from '@angular/common/http';
-
+import { lightingAdReducer } from './store/lighting-ad/lighting-ad.reducer';
+import { categoryReducer } from './store/category/category.reducer';
+import { lightingAdEffects } from './store/lighting-ad/lighting-ad.effects';
+import { CategoryEffects } from './store/category/category.effects';
+import {reducers} from './reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
      provideRouter(routes),
       provideAnimationsAsync(),
       //provideState({name:FeatureKey,reducer:userReducer}),
-      provideEffects(UserEffects),
-      provideStore(userReducer),
+      provideEffects([UserEffects,lightingAdEffects,CategoryEffects]),
+      provideStore(reducers),
       provideHttpClient()
     ]
 };

@@ -1,0 +1,28 @@
+<mat-card class="cont-card mat-elevation-z4">
+    <div class="img-div">
+      <img [src]="imgPath" alt="nesto" class="img" />
+    </div>
+    <mat-card class="add-card">
+      <div class="header-div">
+        <div>
+          <mat-card-title> {{ ad?.title }}</mat-card-title>
+          <mat-card-subtitle>
+            {{ ad?.brand }} </mat-card-subtitle
+          >
+        </div>
+        <div>
+          <button mat-raised-button color="primary">{{ ad?.price + "€" }}</button>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <mat-card-content class="desc-div">
+        <p style="margin-top: 30px">
+          {{ ad?.description }}
+        </p>
+        <button mat-raised-button color="accent" style="align-self: flex-end">
+          Više informacija
+        </button>
+      </mat-card-content>
+      <mat-card-footer> </mat-card-footer>
+    </mat-card>
+  </mat-card>

@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+    <span>RASVETA</span>
+    <button mat-button [matMenuTriggerFor]="menu">Kategorije</button>
+    <mat-menu #menu>
+      <div *ngFor="let category of categories">
+        <button mat-menu-item>{{ category.name }}</button>
+      </div>
+    </mat-menu>
+    <button mat-button>Sačuvani oglasi</button>
+    <button mat-button>Moji oglasi</button>
+    <div class="login-div">
+      <span class="logged-text" *ngIf="user"
+        >{{ "Prijavljen kao " + user?.firstName + " " + user?.lastName }}
+      </span>
+      <button mat-raised-button color="accent" (click)="handleLog()">
+        {{ user ? "Odjavi se" : "Prijavi se" }}
+      </button>
+    </div>
+  </mat-toolbar>
