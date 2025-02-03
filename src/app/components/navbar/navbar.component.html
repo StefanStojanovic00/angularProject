@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-    <span>RASVETA</span>
+    <span class="title" (click)="navigate('home')" >RASVETA</span>
     <button mat-button [matMenuTriggerFor]="menu">Kategorije</button>
     <mat-menu #menu>
       <div *ngFor="let category of categories">

@@ -5,6 +5,7 @@ import { userReducer } from './store/user/user.reducer';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
+import { CreateAdComponent } from './components/create-ad/create-ad.component';
 
 export const routes: Routes = [
     
@@ -13,6 +14,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent }, // Ruta za login komponentu
   //ovo trebam napraviti :D
   { path: 'home', component: HomeComponent},
+  { path: 'create-ad', component: CreateAdComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', component: HomeComponent }
 

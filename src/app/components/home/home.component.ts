@@ -41,6 +41,9 @@ export class HomeComponent {
     });
     
   }
+  navigate(path: string) {
+    this.router.navigate([path]);
+  }
 
   
 }

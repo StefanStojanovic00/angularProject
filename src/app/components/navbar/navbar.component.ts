@@ -47,5 +47,8 @@ export class NavbarComponent {
         this.router.navigate(['login']);
       }
     }
+    navigate(path: string) {
+      this.router.navigate([path]);
+    }
     
 }
