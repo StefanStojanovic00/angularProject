@@ -29,6 +29,6 @@ export const lightingAdReducer= createReducer(
         loading:true,
     })),
     on(LActions.loadAdsSuccess,(state:lightingAdState,{ads})=>{
-        return adapter.addMany(ads,{...state,loading:false});
+        return adapter.setAll(ads,{...state,loading:false});
     })
   );

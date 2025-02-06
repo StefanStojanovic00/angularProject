@@ -8,10 +8,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Router } from '@angular/router';
-import { AppState } from '../../app.state';
+
 import { Store } from '@ngrx/store';
 import { RegisterUser } from '../../models/user';
 import { registerUser } from '../../store/user/user.actions';
+import { AppState } from '../../app.state';
 
 @Component({
   selector: 'app-register',

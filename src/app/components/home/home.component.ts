@@ -3,7 +3,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { NgFor, NgIf } from '@angular/common';
 import { User } from '../../models/user';
-import { AppState } from '../../app.state';
+
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { loadCategories } from '../../store/category/category.action';
@@ -12,6 +12,7 @@ import { Category } from '../../models/category';
 import { FeedComponent } from "../feed/feed.component";
 import { loadAds } from '../../store/lighting-ad/lighting-ad.actions';
 import { NavbarComponent } from "../navbar/navbar.component";
+import { AppState } from '../../app.state';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class HomeComponent {
   constructor(private store:Store<AppState>,private router:Router){}
 
   ngOnInit():void{
-    this.store.dispatch(loadCategories())
+    this.store.dispatch(loadCategories());
     this.store.dispatch(loadAds());
     this.store.subscribe((state)=>
     {

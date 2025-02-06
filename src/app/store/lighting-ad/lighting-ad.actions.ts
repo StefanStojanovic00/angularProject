@@ -8,3 +8,7 @@ export const loadAdsSuccess=createAction(
     'loadAdsSuccess',
     props<{ads:lightingAd[]}>()
 );
+
+export const createAd=createAction('createAd', props<{formData:FormData}>());
+
+export const createAdSuccess=createAction('createAdSuccess');

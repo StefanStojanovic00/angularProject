@@ -8,8 +8,10 @@ import { Store } from '@ngrx/store';
 import { Route, Router } from '@angular/router';
 import { loadCategories } from '../../store/category/category.action';
 import { logoutUser } from '../../store/user/user.actions';
-import { AppState } from '../../app.state';
+
 import { NgFor, NgIf } from '@angular/common';
+import { selectCategoryList } from '../../store/category/category.selector';
+import { AppState } from '../../app.state';
 
 @Component({
   selector: 'app-navbar',
@@ -28,13 +30,17 @@ export class NavbarComponent {
 
     ngOnInit():void
     {
-      this.store.dispatch(loadCategories());
-      this.store.subscribe((state)=>{
+      
+
+       this.store.select(selectCategoryList).subscribe((categories)=>
+        (this.categories=categories));
+       
+       this.store.subscribe((state)=>{
         if(this.user)
-        this.user=state.user.user;
-        if(state.category)
-        this.categories=state.category.categories;
-      });
+        this.user=state.user.user;});
+
+    
+      
     }
 
     handleLog()

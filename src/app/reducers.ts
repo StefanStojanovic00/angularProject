@@ -6,5 +6,5 @@ import { categoryReducer } from "./store/category/category.reducer";
 export const reducers= combineReducers({
     user:userReducer,
     lightingAd:lightingAdReducer,
-    category:categoryReducer
+    category:categoryReducer,
 })

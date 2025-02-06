@@ -1,4 +1,4 @@
-import { createSelector } from "@ngrx/store";
+/*import { createSelector } from "@ngrx/store";
 import { AppState } from "../../app.state";
 import { lightingAd } from '../../models/lighting-ad';
 
@@ -18,4 +18,24 @@ export const selectAdsList= createSelector(
     .map((id)=>lightingAd.entities[id])
     .filter((lightingAd)=> lightingAd!=null)
     .map((lightingAd)=><lightingAd>lightingAd)
-)
+)*/
+
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { lightingAdState } from "./lighting-ad.reducer";
+
+
+
+export const selectAdsFeature = createFeatureSelector<lightingAdState>('lightingAd');
+
+export const selectAdsIds = createSelector(
+    selectAdsFeature,
+    (lightingAd) => lightingAd.ids 
+);
+
+export const selectAdsList = createSelector(
+    selectAdsFeature,
+    (lightingAd) =>
+        lightingAd.ids
+            .map((id) => lightingAd.entities[id])
+            .filter((ad) => ad != null) 
+);

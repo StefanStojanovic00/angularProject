@@ -4,13 +4,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { loginUser } from '../../store/user/user.actions';
-import { AppState } from '../../app.state';
+
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {NgIf} from '@angular/common';
 import { FormControl, Validators } from '@angular/forms';
 import {  Router } from '@angular/router';
+import { AppState } from '../../app.state';
 
 
 

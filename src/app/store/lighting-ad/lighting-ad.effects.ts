@@ -27,5 +27,18 @@ export class lightingAdEffects
                 
         )
     )
+
+    createAd$= createEffect(()=>
+    this.actions$.pipe(ofType(LActions.createAd),
+mergeMap((action)=> this.LightingAdService.create(action.formData).pipe(
+    map((res)=>{
+        console.log(res);
+        return LActions.createAdSuccess();
+    }),
+    catchError(({error})=>{
+        return of({type:'err'});
+    })
+))));
+
     
 }

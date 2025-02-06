@@ -12,7 +12,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 70vh;
+    margin-top: 22px;
   }
   .txt-area {
     resize: none;
@@ -47,4 +47,54 @@
   
   .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  .carousel-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .carousel {
+    width: 300px;
+    height: auto;
+  }
+  .carousel-small {
+    margin-top: 10px;
+    width: 300px;
+    height: auto;
+  }
+  .slide-div {
+    width: 100%;
+    height: 100%;
+  }
+  .slide-img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+  .layout-div {
+    display: flex;
+    height: 100%;
+    width: 100%;
+  }
+  .content-div {
+    margin-left: 20px;
+  }
+  .name-avatar-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .personal-data-div {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    height: 300px;
+    margin: 10px;
+  }
+  .user-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
   }
