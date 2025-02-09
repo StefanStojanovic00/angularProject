@@ -1,3 +1,4 @@
+import { Category } from "./category";
 import { User } from "./user";
 
 
@@ -9,6 +10,6 @@ export interface lightingAd
     brand: string;
     price: number;
     gallery: string[];
-    categoryID:number;
-    creator?: User;
+    category: Category;
+    createdBy?: User;
 }

@@ -14,7 +14,15 @@ export class LightingAdService {
   {
     return this.httpClient.get<lightingAd[]>(`${environment.api}/lighting-ad`);
   }
-  create(formData: FormData) {
-    return this.httpClient.post<any>(`${environment.api}/lighting-ad`, formData);
+  getByUser() {
+    return this.httpClient.get<lightingAd[]>(`${environment.api}/lighting-ad/myAds`);
   }
+  create(formData: FormData) {
+    return this.httpClient.post<lightingAd[]>(`${environment.api}/lighting-ad`, formData);
+  }
+  delete(id:number)
+  {
+    return this.httpClient.delete<any>(`${environment.api}/lighting-ad/${id}`);
+  }
+
 }

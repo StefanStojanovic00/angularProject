@@ -1,0 +1,16 @@
+<mat-card class="profile-card mat-elevation-z4">
+    <img
+      mat-card-avatar
+      [src]="
+        !this.user?.imagePath
+          ? '../../../assets/common/defaultUser.png'
+          : this.user?.imagePath
+      "
+      alt="user-pic"
+      class="user-pic"
+    />
+    <mat-card-title>{{this.user?.firstName + " " + this.user?.lastName}}</mat-card-title>
+    <mat-card-subtitle>Član od: <strong>07.02.2025</strong></mat-card-subtitle>
+    <mat-card-subtitle>Kontakt: <strong>{{this.user?.phone}}</strong></mat-card-subtitle>
+  </mat-card>
+  <app-feed></app-feed>

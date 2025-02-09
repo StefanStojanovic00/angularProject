@@ -1,0 +1,13 @@
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
+    max-width: 60%;
+    margin: 12% auto 0%;
+  }
+  .user-pic {
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+  }

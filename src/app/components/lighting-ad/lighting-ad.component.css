@@ -13,7 +13,7 @@
 .img-div {
     width: 60%;
     height: 100%;
-    background-color: red;
+    background-color: grey;
     margin: 0px;
     padding: 0px;
 }
@@ -21,6 +21,7 @@
     object-fit: cover;
     width: 100%;
     height: 100%;
+    cursor: pointer;
 }
 .add-card {
     width: 100%;
@@ -34,7 +35,7 @@
 }
 .price-div {
     display: flex;
-    background-color: #3F51B5;
+    background-color: #3F51B0;
     color: white;
     height: 40px;
     text-align: center;

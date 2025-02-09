@@ -1,0 +1,118 @@
+<div class="form-div">
+    <div class="layout-div">
+      <div class="row-div">
+        <div class="carousel-div">
+          <ngx-slick-carousel
+            class="carousel mat-elevation-z4"
+            #slickModal
+            [config]="slideConfig"
+          >
+            <div
+              ngxSlickItem
+              *ngFor="let preview of this.ad?.gallery"
+              class="slide-div"
+            >
+              <img
+                [src]="
+                  this.ad?.gallery === null
+                    ? '../../../assets/common/noImage.png'
+                    : '../../../assets/' + preview
+                "
+                alt="nst"
+                class="slide-img"
+              />
+            </div>
+          </ngx-slick-carousel>
+          <ngx-slick-carousel
+            class="carousel-small mat-elevation-z4"
+            [config]="slideConfigSmall"
+          >
+            <div
+              ngxSlickItem
+              *ngFor="let preview of this.ad?.gallery"
+              class="slide-div"
+              style="margin: 10px"
+            >
+              <img
+                [src]="
+                  this.ad?.gallery === null
+                    ? '../../../assets/common/noImage.png'
+                    : '../../../assets/' + preview
+                "
+                alt="nst"
+                class="slide-img"
+              />
+            </div>
+          </ngx-slick-carousel>
+        </div>
+        <div class="content-div">
+          <div class="content-header-div">
+            <div style="width: 100%; height: 100%">
+              <div style="display: flex; align-items: center;">
+                <mat-card-title>{{ this.ad?.title }}</mat-card-title>
+                <button
+                  mat-mini-fab
+                  size="small"
+                  color="accent"
+                  style="margin-left: 10px"
+                >
+                  <mat-icon>bookmark</mat-icon>
+                </button>
+              </div>
+  
+              <h3 style="margin-bottom: 0px">
+                <strong>Brand: </strong>{{ this.ad?.brand }}
+              </h3>
+            </div>
+            <div class="right-corner-div">
+              <div style="display: flex">
+                <button mat-raised-button color="primary">
+                  {{ this.ad?.price + " €" }}
+                </button>
+              </div>
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon color="primary">more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                  <mat-icon>edit_note</mat-icon>
+                  <span>Izmeni oglas</span>
+                </button>
+                <button mat-menu-item (click)="handleDelete()">
+                  <mat-icon color="warn">delete</mat-icon>
+                  <span>Obriši oglas</span>
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+  
+          <h3><strong>Deskripcija: </strong></h3>
+          <p>
+            {{ this.ad?.description }}
+          </p>
+        </div>
+      </div>
+      <mat-card class="personal-data-div mat-elevation-z3">
+        <div class="name-avatar-div">
+          <img
+            mat-card-avatar
+            [src]="
+              !this.ad?.createdBy?.imagePath
+                ? '../../../assets/common/defaultUser.png'
+                : this.ad?.createdBy?.imagePath
+            "
+            alt="user"
+            class="user-img"
+          />
+          <mat-card-title>{{
+              this.ad?.createdBy?.firstName + " " + this.ad?.createdBy?.lastName
+          }}</mat-card-title>
+        </div>
+        
+  
+        <h4 style="margin-bottom: 0px"><strong>Telefon</strong></h4>
+        <h4>{{ this.ad?.createdBy?.phone }}</h4>
+      </mat-card>
+    </div>
+  </div>

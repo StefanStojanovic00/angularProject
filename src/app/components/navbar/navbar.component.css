@@ -11,3 +11,12 @@
     font-weight: 600;
     cursor: pointer;
 }
+.navbar {
+    position: fixed;
+    top: 0px;
+    z-index: 1000;
+}
+button 
+{
+    margin: 10px;
+}

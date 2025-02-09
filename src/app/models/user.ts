@@ -8,6 +8,7 @@ export interface User
     firstName: string;
     lastName: string;
     phone: string;
+    imagePath: string;
 }
 
 export interface LoginUser{

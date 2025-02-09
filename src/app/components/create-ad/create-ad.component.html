@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="cont-div">
   <mat-card class="stepper-card-cont mat-elevation-z4">
     <mat-stepper linear="true" #stepper>
@@ -194,6 +195,13 @@
             </div>
             <mat-card class="personal-data-div mat-elevation-z3">
               <div class="name-avatar-div">
+
+                <img
+                  mat-card-avatar
+                  [src]="!this.user?.imagePath ? '../../../assets/common/defaultUser.png' : this.user?.imagePath"
+                  alt="user"
+                  class="user-img"
+                />
                
                 <mat-card-title>{{
                   this.user?.firstName + " " + this.user?.lastName

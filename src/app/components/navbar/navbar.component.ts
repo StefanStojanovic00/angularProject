@@ -23,7 +23,7 @@ export class NavbarComponent {
     user: User | null=null;
     categories: Category[]=[];
 
-    constructor(private store:Store<AppState>, private router:Router)
+    constructor(private store:Store<AppState>, public router:Router)
     {
 
     }

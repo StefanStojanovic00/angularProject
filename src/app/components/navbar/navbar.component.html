@@ -1,19 +1,23 @@
-<mat-toolbar color="primary">
-    <span class="title" (click)="navigate('home')" >RASVETA</span>
-    <button mat-button [matMenuTriggerFor]="menu">Kategorije</button>
-    <mat-menu #menu>
-      <div *ngFor="let category of categories">
-        <button mat-menu-item>{{ category.name }}</button>
-      </div>
-    </mat-menu>
-    <button mat-button>Sačuvani oglasi</button>
-    <button mat-button>Moji oglasi</button>
-    <div class="login-div">
-      <span class="logged-text" *ngIf="user"
-        >{{ "Prijavljen kao " + user?.firstName + " " + user?.lastName }}
-      </span>
-      <button mat-raised-button color="accent" (click)="handleLog()">
-        {{ user ? "Odjavi se" : "Prijavi se" }}
-      </button>
+<mat-toolbar
+  color="primary"
+  class="navbar"
+  *ngIf="this.router.url !== '/login' && this.router.url !== '/register'"
+>
+  <span class="title" (click)="navigate('home')" >RASVETA</span>
+  <button mat-button [matMenuTriggerFor]="menu">Kategorije</button>
+  <mat-menu #menu>
+    <div *ngFor="let category of categories">
+      <button mat-menu-item>{{ category.name }}</button>
     </div>
-  </mat-toolbar>
+  </mat-menu>
+  <button mat-button (click)="navigate('saved-ads')">Sačuvani oglasi</button>
+  <button mat-button (click)="navigate('myAds')">Moji oglasi</button>
+  <div class="login-div">
+    <span class="logged-text" *ngIf="user"
+      >{{ "Prijavljen kao " + user.firstName + " " + user.lastName }}
+    </span>
+    <button mat-raised-button color="accent" (click)="handleLog()">
+      {{ user ? "Odjavi se" : "Prijavi se" }}
+    </button>
+  </div>
+</mat-toolbar>

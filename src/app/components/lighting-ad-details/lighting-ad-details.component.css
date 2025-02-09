@@ -1,0 +1,81 @@
+.form-div {
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+  }
+  .carousel-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .carousel {
+    width: 300px;
+    height: auto;
+  }
+  .carousel-small {
+    margin-top: 10px;
+    width: 300px;
+    height: auto;
+  }
+  .slide-div {
+    width: 100%;
+    height: 100%;
+  }
+  .slide-img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+  .layout-div {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
+  .content-div {
+    margin-left: 20px;
+    width: 100%;
+    height: 100%;
+  }
+  .row-div {
+    display: flex;
+    height: 100%;
+    width: 100%;
+  }
+  .name-avatar-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .personal-data-div {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    max-height: 320px;
+    margin-left: 20px;
+  }
+  .user-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+  .img-img {
+    object-fit: cover;
+    width: 200px;
+    height: 300px;
+    margin: 10px;
+    cursor: pointer;
+  }
+  .content-header-div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+  }
+  .right-corner-div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }

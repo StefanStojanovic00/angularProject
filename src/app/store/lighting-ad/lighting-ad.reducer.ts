@@ -30,5 +30,12 @@ export const lightingAdReducer= createReducer(
     })),
     on(LActions.loadAdsSuccess,(state:lightingAdState,{ads})=>{
         return adapter.setAll(ads,{...state,loading:false});
+    }),
+    on(LActions.loadMyAdsSuccess,(state:lightingAdState,{ads})=>{
+        return adapter.setAll(ads,state);
+    }),
+    on(LActions.deleteAdsSuccess, (state:lightingAdState,{adId})=>
+    {
+        return adapter.removeOne(adId,state);
     })
   );

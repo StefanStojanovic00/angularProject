@@ -39,3 +39,8 @@ export const selectAdsList = createSelector(
             .map((id) => lightingAd.entities[id])
             .filter((ad) => ad != null) 
 );
+
+export const selectAdById=(id:number)=>createSelector(
+    selectAdsFeature,
+    (ads)=> {return ads.entities[id];}
+)

@@ -21,6 +21,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { selectCategoryList  } from '../../store/category/category.selector';
 import { loadCategories } from '../../store/category/category.action';
 import { AppState } from '../../app.state';
+import { getUser } from '../../auth/user-context';
 
 
 @Component({
@@ -31,7 +32,7 @@ import { AppState } from '../../app.state';
 })
 export class CreateAdComponent{
 
-  user:  User | null= null;
+  user:  User | null= getUser();
 
   constructor(private _formBuilder: FormBuilder,
     private store: Store<AppState>){}
@@ -44,6 +45,7 @@ export class CreateAdComponent{
   selectFormControl = new FormControl('', Validators.required);
 
   categories: Category[] = [];
+
 
   previews: string[] = [];
   sliderPrev: string[] = [];

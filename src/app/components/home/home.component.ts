@@ -13,11 +13,11 @@ import { FeedComponent } from "../feed/feed.component";
 import { loadAds } from '../../store/lighting-ad/lighting-ad.actions';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { AppState } from '../../app.state';
-
+import { ToolbarComponent } from '../toolbar/toolbar.component';
 
 @Component({
   selector: 'app-home',
-  imports: [MatToolbarModule, MatMenuModule, NgIf, NgFor, FeedComponent, NavbarComponent],
+  imports: [ToolbarComponent,MatToolbarModule, MatMenuModule, NgIf, NgFor, FeedComponent, NavbarComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
