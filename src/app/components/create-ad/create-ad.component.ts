@@ -30,9 +30,10 @@ import { getUser } from '../../auth/user-context';
   templateUrl: './create-ad.component.html',
   styleUrl: './create-ad.component.css'
 })
-export class CreateAdComponent{
+export class CreateAdComponent implements OnInit{
 
-  user:  User | null= getUser();
+
+  user:  User | null= null;
 
   constructor(private _formBuilder: FormBuilder,
     private store: Store<AppState>){}
@@ -50,7 +51,7 @@ export class CreateAdComponent{
   previews: string[] = [];
   sliderPrev: string[] = [];
 
-  selectedFiles?: FileList;
+  selectedFiles: File[] = [];
   selectedFileNames: string[] = [];
 
 
@@ -71,7 +72,7 @@ export class CreateAdComponent{
     this.store.subscribe((state)=>{
 
       
-
+        this.user=state.user.user;
 
       this.dataFormGroup = this._formBuilder.group({
         titleControl: ['', Validators.required],
@@ -113,6 +114,11 @@ export class CreateAdComponent{
 
   drop(event: CdkDragDrop<any,any,any>) {
     moveItemInArray(this.previews, event.previousIndex, event.currentIndex);
+    moveItemInArray(
+      this.selectedFileNames,
+      event.previousIndex,
+      event.currentIndex
+    );
     this.sliderPrev = [];
   }
 
@@ -131,11 +137,12 @@ export class CreateAdComponent{
        
         const formData= new FormData();
 
-        if(this.selectedFiles)
-          for(let i=0;i<this.selectedFiles.length;i++)
-          {
-            formData.append('images',this.selectedFiles[i]);
+        this.selectedFileNames.forEach((img) => {
+          for (let i = 0; i < this.selectedFiles.length; i++) {
+            if (img == this.selectedFiles[i].name)
+              formData.append('images', this.selectedFiles[i]);
           }
+        });
 
           formData.append(
             'title',
@@ -154,4 +161,10 @@ export class CreateAdComponent{
       
           this.store.dispatch(createAd({ formData }));
       }
+      
+      removeImg(value: string) {
+        const index: number = Number(value);
+      this.previews.splice(index, 1);
+      this.selectedFileNames.splice(index, 1);
+        }
 }

@@ -11,6 +11,7 @@ import { Role } from './enum/role';
 import { AuthGuard } from './auth/auth.guard';
 import { MyAdsComponent } from './components/my-ads/my-ads.component';
 import { SavedAdsComponent } from './components/saved-ads/saved-ads.component';
+import { EditAdComponent } from './components/edit-ad/edit-ad.component';
 
 export const routes: Routes = [
     
@@ -22,7 +23,11 @@ export const routes: Routes = [
   { path: 'create-ad', component: CreateAdComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', component: HomeComponent },
-  { path: 'lighting-ad-details/:adId', component: LightingAdDetailsComponent},
+  { path: 'lighting-ad-details/:id',
+    component: LightingAdDetailsComponent,
+    canActivate: [AuthGuard],
+    data: { role: Role.User },
+  },
   {
     path: 'myAds',
     component: MyAdsComponent,
@@ -38,6 +43,12 @@ export const routes: Routes = [
   {
     path: 'saved-ads',
     component: SavedAdsComponent,
+    canActivate: [AuthGuard],
+    data: { role: Role.User },
+  },
+  {
+    path: 'edit-ad/:id',
+    component: EditAdComponent,
     canActivate: [AuthGuard],
     data: { role: Role.User },
   },

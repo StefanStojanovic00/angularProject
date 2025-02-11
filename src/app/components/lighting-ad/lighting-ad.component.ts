@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { lightingAd } from '../../models/lighting-ad';
 import { MatCardModule } from '@angular/material/card';
@@ -13,7 +13,7 @@ import {MatRippleModule} from '@angular/material/core';
   templateUrl: './lighting-ad.component.html',
   styleUrl: './lighting-ad.component.css'
 })
-export class LightingAdComponent {
+export class LightingAdComponent implements OnInit {
 
 
 
@@ -21,7 +21,7 @@ export class LightingAdComponent {
 
     //imgPath:string ='src\assets';
     
-    imgPath: string = environment.api+'/';
+    imgPath: string = environment.api;
 
     
    constructor(private router:Router)

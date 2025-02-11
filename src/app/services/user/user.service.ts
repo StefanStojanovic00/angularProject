@@ -22,4 +22,7 @@ export class UserService {
       ...data,
     });
   }
+  toggleSave(adId: number) {
+    return this.httpClient.get<any>(`${environment.api}/users/toggleSave/${adId}`);
+  }
 }

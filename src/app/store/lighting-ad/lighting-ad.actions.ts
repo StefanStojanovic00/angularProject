@@ -29,3 +29,37 @@ export const deleteAdsSuccess = createAction(
   'deleteAdsSuccess',
   props<{ adId:number  }>()
 );
+
+export const loadOneAd = createAction(
+  'loadSingleAd',
+  props<{ adId: number }>()
+);
+export const loadOneAdSuccess = createAction(
+  'loadSingleAdSuccess',
+  props<{ ad: lightingAd }>()
+);
+
+export const loadSavedAds = createAction('loadSavedAds');
+export const loadSavedAdsSuccess = createAction(
+  'loadSavedAdsSuccess',
+  props<{ ads: lightingAd[] }>()
+);
+
+
+export const searchedAds= createAction(
+  'searchedAds',
+  props<{input:string, categoryId:string}>()
+);
+export const searchAdsSuccess=createAction(
+  'searchAdsSuccess',
+  props<{ads:lightingAd[]}>()
+);
+
+export const updateAd=createAction(
+  'updateAction',
+  props<{formData:FormData}>()    
+);
+export const updateAdSeccess=createAction(
+  'updateAdSeccess',
+  props<{ad:lightingAd}>()
+)

@@ -12,4 +12,5 @@ export interface lightingAd
     gallery: string[];
     category: Category;
     createdBy?: User;
+    isSaved?: boolean;
 }

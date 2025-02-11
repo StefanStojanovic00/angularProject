@@ -25,4 +25,20 @@ export class LightingAdService {
     return this.httpClient.delete<any>(`${environment.api}/lighting-ad/${id}`);
   }
 
+  getOne(id: number) {
+    return this.httpClient.get<lightingAd>(`${environment.api}/lighting-ad/${id}`);
+  }
+  getByUserSaved() {
+    return this.httpClient.get<lightingAd[]>(`${environment.api}/lighting-ad/savedAds`);
+  }
+
+  getBySearch(input:string,categoryId:string)
+  {
+    return this.httpClient.get<lightingAd[]>(`${environment.api}/lighting-ad/search?categoryId=${categoryId}&searchInput=${input}`) 
+  }
+
+  update(formData:FormData)
+  {
+    return this.httpClient.put<lightingAd>(`${environment.api}/lighting-ad/`, formData);
+  }
 }

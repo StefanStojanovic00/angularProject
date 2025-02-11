@@ -1,0 +1,99 @@
+<mat-card class="edit-cont mat-elevation-z4">
+    <form class="form">
+        <div class="form-part-div">
+          <mat-form-field appearance="outline">
+            <mat-label>Kategorija</mat-label>
+            <mat-select [(value)]="selectedCategory" #categoryRef (selectionChange)="setCategory(categoryRef.value)" required>
+              <mat-option *ngFor="let category of categories" [value]="category.id">
+                {{ category.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Naslov oglasa</mat-label>
+            <input
+              matInput
+              placeholder="Prodajem..."
+              defaultValue="title"
+              #titleRef
+              (change)="setTitle(titleRef.value)"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Cena</mat-label>
+            <input
+              matInput
+              type="number"
+              min="0"
+              placeholder="0"
+              defaultValue="price"
+              #priceRef
+              (change)="setPrice(priceRef.value)"
+            />
+            <span matSuffix>€&nbsp;</span>
+          </mat-form-field>
+        </div>
+        <div class="form-part-div">
+          <mat-form-field appearance="outline">
+            <mat-label>Brand</mat-label>
+            <input
+              matInput
+              placeholder="Browning"
+              required
+              defaultValue="brand"
+              #brandRef
+              (change)="setBrand(brandRef.value)"
+            />
+          </mat-form-field>
+          
+        </div>
+        <div class="form-part-div" style="width: 30%; height: 100%">
+          <mat-form-field appearance="outline">
+            <mat-label>Opis oglasa</mat-label>
+            <textarea
+              matInput
+              placeholder="Opis oglasa"
+              rows="6"
+              required
+              defaultValue="description"
+              #descriptionRef
+              (change)="setDesc(descriptionRef.value)"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </form>
+      <div class="images-div">
+        <div
+          cdkDropList
+          cdkDropListOrientation="horizontal"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div class="drag-div" cdkDrag *ngFor="let preview of previews; index as i">
+            <button  mat-mini-fab value={{preview}} color="accent" class="remove-btn" (click)="removeImg(btnRemove.id)">
+              <mat-icon>close</mat-icon>
+            </button>
+            <img #btnRemove [id]="i" [src]="imgPath + preview" class="img-img"/>
+          </div>
+        </div>
+        <button
+          mat-stroked-button
+          color="primary"
+          type="button"
+          (click)="fileInput.click()"
+        >
+          <span>Dodaj fotografije</span>
+          <input
+            #fileInput
+            type="file"
+            accept="image/*"
+            multiple
+            required
+            (change)="handleSelectedFiles($event)"
+            style="display: none"
+          />
+        </button>
+      </div>
+      <button mat-raised-button color="primary" style="margin-top: 20px;" (click)="handleSaveChanges()">Sačuvaj izmene</button>
+    
+</mat-card>

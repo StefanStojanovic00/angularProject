@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -20,7 +20,7 @@ import { AppState } from '../../app.state';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
 
 
   email=new FormControl('',[Validators.required,Validators.email]);
@@ -32,14 +32,13 @@ export class RegisterComponent {
   loading:boolean=false;
 
   constructor(private store:Store<AppState>,private router:Router){}
-
-  ngOnInig(){
+  ngOnInit(): void {
     this.store.subscribe((state)=>
-    {
-      this.loading=state.user.loading;
-    });
-    
+      {
+        this.loading=state.user.loading;
+      });
   }
+
   navigate() {
     this.router.navigate(['login']);
   }

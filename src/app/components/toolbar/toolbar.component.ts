@@ -14,6 +14,7 @@ import { loadCategories } from '../../store/category/category.action';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { searchedAds } from '../../store/lighting-ad/lighting-ad.actions';
 
 @Component({
   selector: 'app-toolbar',
@@ -22,10 +23,14 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './toolbar.component.css'
 })
 export class ToolbarComponent implements OnInit {
+
   faMagnifyingGlass = faMagnifyingGlass;
 
   user: User | null = null;
   categories: Category[] | null = null;
+
+  input:string='';
+  selectedCatergory:string ='';
 
   constructor(private store: Store<AppState>) { }
 
@@ -41,4 +46,15 @@ export class ToolbarComponent implements OnInit {
           (this.categories=categories));
           this.store.dispatch(loadCategories());
   }
+
+  
+    handleSearch() {
+      this.store.dispatch(
+        searchedAds({ input: this.input, categoryId: this.selectedCatergory })
+      );     
+    }
+
+    setCategory(value: string) {
+      this.selectedCatergory=value;
+      }
 }

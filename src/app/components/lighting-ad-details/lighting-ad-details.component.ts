@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { lightingAd } from '../../models/lighting-ad';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from '../../app.state';
 import { Store } from '@ngrx/store';
 import { selectAdById } from '../../store/lighting-ad/lighting-ad.selector';
@@ -10,7 +10,9 @@ import {MatDividerModule} from '@angular/material/divider';
 import { User } from '../../models/user';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
-import { deleteAd } from '../../store/lighting-ad/lighting-ad.actions';
+import { deleteAd, loadOneAd } from '../../store/lighting-ad/lighting-ad.actions';
+import { toggleSaveAd } from '../../store/user/user.actions';
+import { environment } from '../../../enviroments/enviroment';
 
 
 @Component({
@@ -22,6 +24,7 @@ import { deleteAd } from '../../store/lighting-ad/lighting-ad.actions';
 export class LightingAdDetailsComponent implements OnInit {
 
 
+
   adId!:number;
   ad?:lightingAd;
   user: User | null =null;
@@ -29,14 +32,14 @@ export class LightingAdDetailsComponent implements OnInit {
   slideConfig = { slidesToShow: 1, slidesToScroll: 1 };
   slideConfigSmall = { slidesToShow: 5, slidesToScroll: 5 };
 
+  imgPath: string = environment.api + '/';
 
-
-  constructor(private router:ActivatedRoute,private store: Store<AppState>){
+  constructor(private route:ActivatedRoute, private router: Router,private store: Store<AppState>){
     
   }
   ngOnInit(): void {
-    this.router.params.subscribe((params)=>(this.adId=params['adId']));
-
+    this.route.params.subscribe((params)=>(this.adId=params['id']));
+    this.store.dispatch(loadOneAd({ adId: this.adId }))
     this.store.select(selectAdById(this.adId)).subscribe((item)=>{
       this.ad=item;
     });
@@ -48,5 +51,13 @@ export class LightingAdDetailsComponent implements OnInit {
       if(this.ad!==undefined && this.ad !== null)
         this.store.dispatch(deleteAd({adId:Number(this.ad.id)}));
     }
+
+      handleEdit() {
+        this.router.navigate(['edit-ad/'+this.ad?.id]);
+      }
+      handleSave() {
+        if (this.ad !== undefined && this.ad !== null)
+          this.store.dispatch(toggleSaveAd({ adId: Number(this.ad.id) }));
+      }
   
 }

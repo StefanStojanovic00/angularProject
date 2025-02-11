@@ -86,6 +86,25 @@ export class UserEffects {
       )
     );
 
+    toggleSaved$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(UserActions.toggleSaveAd),
+        mergeMap(({ adId }) =>
+          this.userService.toggleSave(adId).pipe(
+            map(() => {
+              return UserActions.toggleSaveSuccess({ adId: adId });
+            }),
+            catchError(() => {
+              this.snackBar.open('Greška sa serverske strane', 'Zatvori', {
+                duration: 5000,
+              });
+              return of({ type: 'error' });
+            })
+          )
+        )
+      )
+    );
+
 
 
 }

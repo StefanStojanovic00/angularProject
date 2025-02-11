@@ -1,3 +1,4 @@
 <div class="feed-div">
-    <app-lighting-ad *ngFor="let ad of ads  | async" [ad]="ad"></app-lighting-ad>
+    <app-lighting-ad *ngFor="let ad of ads" [ad]="ad"></app-lighting-ad>
+    <h4 *ngIf="ads?.length === 0">Prazno</h4>
 </div>

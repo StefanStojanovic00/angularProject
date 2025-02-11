@@ -1,0 +1,40 @@
+.edit-cont {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 80%;
+    margin: 20px 60px 0px;
+}
+.form {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .images-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .form-part-div {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin-left: 20px;
+  }
+  .img-img {
+    object-fit: cover;
+    width: 150px;
+    height: 250px;
+    cursor: pointer;
+  }
+  .drag-div {
+    position: relative;
+    display: inline-block;
+    margin: 20px;
+  }
+  .remove-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+  }

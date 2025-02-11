@@ -27,3 +27,12 @@ export const registerUser=createAction(
 export const registerSuccess = createAction('registerSuccess');
 export const registerFailure = createAction('registerFailure');
 export const logoutUser = createAction('logoutUser');
+
+export const toggleSaveAd = createAction(
+    'toggleSaveAd',
+    props<{ adId: number }>()
+  );
+  export const toggleSaveSuccess = createAction(
+    'toggleSaveSuccess',
+    props<{ adId: number }>()
+  );

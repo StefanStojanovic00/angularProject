@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LightingAdComponent } from "../lighting-ad/lighting-ad.component";
 import { Observable, of } from 'rxjs';
 import { lightingAd } from '../../models/lighting-ad';
@@ -14,12 +14,14 @@ import { AppState } from '../../app.state';
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.css'
 })
-export class FeedComponent {
-    ads:Observable<lightingAd[]> | null =of([]);
+export class FeedComponent implements OnInit{
+    ads:lightingAd[] | null =[];
 
     constructor(private store: Store<AppState>){}
 
     ngOnInit(): void{
-      this.ads=this.store.select(selectAdsList);
+     this.store.select(selectAdsList).subscribe((ads)=>{
+      this.ads=ads;
+     });
     }
 }

@@ -98,5 +98,80 @@ mergeMap((action)=> this.LightingAdService.create(action.formData).pipe(
           })
         )
       );
+
+
+      loadOneAd$ = createEffect(() =>
+        this.actions$.pipe(
+          ofType(LActions.loadOneAd),
+          mergeMap(({adId}) =>
+            this.LightingAdService.getOne(adId).pipe(
+              map((ad: lightingAd) => {
+                return LActions.loadOneAdSuccess({ ad });
+              }),
+              catchError(({ error }) => {
+                return of({ type: error.message  });
+              })
+            )
+          )
+        )
+      );
+
+      loadSavedAd$ = createEffect(() =>
+        this.actions$.pipe(
+          ofType(LActions.loadSavedAds),
+          mergeMap(() =>
+            this.LightingAdService.getByUserSaved().pipe(
+              map((ads: lightingAd[]) => {
+                return LActions.loadSavedAdsSuccess({ ads });
+              }),
+              catchError(({ error }) => {
+                return of({  type: error.message });
+              })
+            )
+          )
+        )
+      );
+
+    searchAd$= createEffect(()=>
+    this.actions$.pipe(
+      ofType(LActions.searchedAds),
+      mergeMap(({input,categoryId})=>
+      this.LightingAdService.getBySearch(input,categoryId).pipe(
+        map((ads:lightingAd[])=>{
+          return LActions.searchAdsSuccess({ads});
+        }),
+        catchError(({ error }) => {
+          return of({  type: error.message });
+        })       
+      ),
+        
+      ))
+    );
+
+    updateAd$=createEffect(()=>
+      this.actions$.pipe(
+        ofType(LActions.updateAd),
+        mergeMap((action)=>
+        this.LightingAdService.update(action.formData).pipe(
+          map((ad)=>{
+            if(ad)
+            {
+              this.router.navigate(['lighting-ad-details/${ad.id}'],{replaceUrl:true});
+              this.snackBar.open('Izmenjen oglas','Ok',{duration:5000});
+              
+            }
+            return LActions.updateAdSeccess({ad:ad});
+          }),
+          catchError(({ error }) => {
+            this.snackBar.open('Greška na strani servera', 'Zatvori', {
+              duration: 5000,
+            });
+            return of({  type: error.message });
+          }) 
+        ))
+      )
+      
+    )
+
     
 }
