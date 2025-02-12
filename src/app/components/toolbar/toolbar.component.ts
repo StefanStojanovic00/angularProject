@@ -15,10 +15,12 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { searchedAds } from '../../store/lighting-ad/lighting-ad.actions';
+import {MatChipsModule} from '@angular/material/chips';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-toolbar',
-  imports: [MatIconModule,MatInputModule,MatOptionModule, MatCardModule,MatFormFieldModule,MatSelectModule,FontAwesomeModule,NgFor],
+  imports: [MatChipsModule,MatIconModule,MatInputModule,MatOptionModule, MatCardModule,MatFormFieldModule,MatSelectModule,FontAwesomeModule,NgFor],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.css'
 })
@@ -30,8 +32,10 @@ export class ToolbarComponent implements OnInit {
   categories: Category[] | null = null;
 
   input:string='';
-  selectedCatergory:string ='';
 
+  
+  category=new FormControl();
+  queries:string[]=[];
   constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
@@ -50,11 +54,30 @@ export class ToolbarComponent implements OnInit {
   
     handleSearch() {
       this.store.dispatch(
-        searchedAds({ input: this.input, categoryId: this.selectedCatergory })
+        searchedAds({ input: this.input, categoryId: this.category.value ? this.category.value : '',})
       );     
+
+      if(this.input.length>0)
+      {
+        this.queries=[];
+        this.queries.push(this.input);
+        this.input='';
+      }
     }
 
-    setCategory(value: string) {
-      this.selectedCatergory=value;
+   
+      removeQuery(value:string):void
+      {
+          const index =this.queries.indexOf(value);
+
+          if(index >=0)
+          {
+            this.queries.splice(index,1);
+          }
+          this.store.dispatch(
+            searchedAds({
+              input:this.input, categoryId: this.category.value ? this.category.value : ''
+            })
+          );
       }
 }

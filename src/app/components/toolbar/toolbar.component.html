@@ -13,13 +13,27 @@
       </mat-form-field>
       <mat-form-field appearance="outline" style="margin-top: 30px;">
         <mat-label>Kategorija</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let category of categories" [value]="category.id"
-          #categoryRef
-          (onSelectionChange)="setCategory(categoryRef.value); handleSearch()">
+        <mat-select formControl="category"
+        (onSelectionChange)="handleSearch()">
+          <mat-option value=""> Sve </mat-option>
+          <mat-option   *ngFor="let category of categories" [value]="category.id"
+          [value]="category.id"
+          >
             {{ category.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
+      <div style="width: 100%; height: 100%">
+        <mat-chip-listbox>
+          <mat-chip color="primary"
+            selected
+            *ngFor="let query of queries"
+            (removed)="removeQuery(query)">
+            {{ query }}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button></mat-chip>
+          </mat-chip-listbox>
+      </div>
     </form>
   </mat-card>

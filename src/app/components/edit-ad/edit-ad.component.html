@@ -73,7 +73,7 @@
             <button  mat-mini-fab value={{preview}} color="accent" class="remove-btn" (click)="removeImg(btnRemove.id)">
               <mat-icon>close</mat-icon>
             </button>
-            <img #btnRemove [id]="i" [src]="imgPath + preview" class="img-img"/>
+            <img #btnRemove [id]="i" [src]="this.selectedFiles ? preview : imgPath + preview" class="img-img"/>
           </div>
         </div>
         <button

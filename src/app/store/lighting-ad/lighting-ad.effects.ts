@@ -6,6 +6,7 @@ import { catchError, map, mergeMap, of, retry } from "rxjs";
 import { lightingAd } from "../../models/lighting-ad";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
+import { merge } from "jquery";
 
 
 @Injectable()
@@ -172,6 +173,31 @@ mergeMap((action)=> this.LightingAdService.create(action.formData).pipe(
       )
       
     )
+
+
+    adminDleteAd$=createEffect(()=>
+    this.actions$.pipe(ofType(LActions.adminDeleteAd),
+    mergeMap(({adId})=>{
+      const id:number=adId;
+      return this.LightingAdService.adminDelete(adId).pipe(
+        map((res)=>{
+          if(res.success)
+          {
+            this.snackBar.open('Oglas je obrisan','Zatvori',{duration:5000,});
+            this.router.navigate(['home'],{replaceUrl:true});
+          }
+          return LActions.adminDeleteAdSuccess({adId:id});
+        })
+      )
+    }),catchError(({ error }) => {
+      this.snackBar.open('Greška na strani servera', 'Zatvori', {
+        duration: 5000,
+      });
+      return of({  type: error.message });
+    }))
+    );
+
+
 
     
 }

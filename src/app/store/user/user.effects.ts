@@ -56,6 +56,7 @@ export class UserEffects {
     mergeMap(()=>{
       setToken(null);
       SetUser(null);
+      this.router.navigate(['home'], { replaceUrl: true });
       return of(({type:'logged out'}))
     })));
 

@@ -87,7 +87,7 @@
                 </button>
                 <button
                 mat-menu-item
-                *ngIf="this.ad?.createdBy?.id === this.user?.id"
+                *ngIf="this.ad?.createdBy?.id === this.user?.id || this.user?.role==='admin'"
                 (click)="handleDelete()"
               >>
                   <mat-icon color="warn">delete</mat-icon>

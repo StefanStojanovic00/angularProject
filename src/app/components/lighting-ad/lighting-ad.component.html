@@ -1,7 +1,7 @@
-<mat-card class="cont-card mat-elevation-z4">
+<mat-card class="cont-card mat-elevation-z4" matRipple (click)="Details()">
     <div class="img-div">
-      <img [src]="this.ad?.gallery![0] !== ''
-          ? imgPath + '/' + this.ad?.gallery![0]
+      <img [src]="(this.ad?.gallery)![0] !== ''
+          ? imgPath + '/' + (this.ad?.gallery)![0]
           : '../../../assets/common/noImage.png'"
       alt="nesto" class="img"
     />

@@ -69,7 +69,7 @@ export class EditAdComponent implements OnInit {
 
   handleSaveChanges() {
     const formData= new FormData();
-    let gallery: string[]=[];
+   
 
     if(!this.selectedFiles)
     {

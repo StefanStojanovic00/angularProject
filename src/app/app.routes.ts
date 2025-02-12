@@ -52,5 +52,5 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     data: { role: Role.User },
   },
-
+  
 ];

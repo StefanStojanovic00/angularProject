@@ -17,10 +17,10 @@ export const initialStateL:UserState={
 
 export const userReducer=createReducer(
     initialStateL,
-    on(UserActions.loginSuccess, (state, action) => ({
+    on(UserActions.loginSuccess, (state, {data}) => ({
         ...state,
-        user: action.data.user,
-        access_token: action.data.access_token,
+        user: data.user,
+        access_token:data.access_token,
         loading:false
       })),
     on(UserActions.loginUser,(state,action)=>({

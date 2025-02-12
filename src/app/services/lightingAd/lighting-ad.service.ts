@@ -41,4 +41,13 @@ export class LightingAdService {
   {
     return this.httpClient.put<lightingAd>(`${environment.api}/lighting-ad/`, formData);
   }
+
+  adminDelete(id:number)
+  {
+    return this.httpClient.patch<any>(`${environment.api}/lighting-ad/softDelete/`,{
+      id:id,
+    });
+  
+  }
+
 }

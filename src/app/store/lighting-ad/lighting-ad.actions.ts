@@ -63,3 +63,12 @@ export const updateAdSeccess=createAction(
   'updateAdSeccess',
   props<{ad:lightingAd}>()
 )
+
+export const adminDeleteAd=createAction(
+  'adminDeleteAd',
+  props<{adId:number}>()
+);
+export const adminDeleteAdSuccess=createAction(
+  'adminDeleteAdSuccess',
+  props<{adId:number}>()
+);

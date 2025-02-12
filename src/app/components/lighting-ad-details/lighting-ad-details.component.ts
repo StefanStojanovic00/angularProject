@@ -10,7 +10,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { User } from '../../models/user';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
-import { deleteAd, loadOneAd } from '../../store/lighting-ad/lighting-ad.actions';
+import { adminDeleteAd, deleteAd, loadOneAd } from '../../store/lighting-ad/lighting-ad.actions';
 import { toggleSaveAd } from '../../store/user/user.actions';
 import { environment } from '../../../enviroments/enviroment';
 
@@ -49,7 +49,12 @@ export class LightingAdDetailsComponent implements OnInit {
   }
   handleDelete() {
       if(this.ad!==undefined && this.ad !== null)
+        if (this.user?.id === this.ad?.createdBy?.id)
         this.store.dispatch(deleteAd({adId:Number(this.ad.id)}));
+  
+        else if (this.user?.role === 'admin') {
+          this.store.dispatch(adminDeleteAd({ adId: Number(this.ad.id) }));
+        }
     }
 
       handleEdit() {
