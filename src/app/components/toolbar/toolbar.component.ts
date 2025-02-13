@@ -16,11 +16,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { searchedAds } from '../../store/lighting-ad/lighting-ad.actions';
 import {MatChipsModule} from '@angular/material/chips';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-toolbar',
-  imports: [MatChipsModule,MatIconModule,MatInputModule,MatOptionModule, MatCardModule,MatFormFieldModule,MatSelectModule,FontAwesomeModule,NgFor],
+  imports: [ReactiveFormsModule,MatChipsModule,MatIconModule,MatInputModule,MatOptionModule, MatCardModule,MatFormFieldModule,MatSelectModule,FontAwesomeModule,NgFor],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.css'
 })
@@ -31,8 +31,8 @@ export class ToolbarComponent implements OnInit {
   user: User | null = null;
   categories: Category[] | null = null;
 
-  input:string='';
-
+  //input:string='';
+    input = new FormControl(''); 
   
   category=new FormControl();
   queries:string[]=[];
@@ -54,14 +54,14 @@ export class ToolbarComponent implements OnInit {
   
     handleSearch() {
       this.store.dispatch(
-        searchedAds({ input: this.input, categoryId: this.category.value ? this.category.value : '',})
+        searchedAds({ input: this.input.value ? this.input.value : '' , categoryId: this.category.value ? this.category.value : '',})
       );     
 
-      if(this.input.length>0)
+      if(this.input.value && this.input.value.length > 0)
       {
         this.queries=[];
-        this.queries.push(this.input);
-        this.input='';
+        this.queries.push(this.input.value);
+        this.input.setValue('');
       }
     }
 
@@ -76,7 +76,7 @@ export class ToolbarComponent implements OnInit {
           }
           this.store.dispatch(
             searchedAds({
-              input:this.input, categoryId: this.category.value ? this.category.value : ''
+              input: this.input.value ? this.input.value : '', categoryId: this.category.value ? this.category.value : ''
             })
           );
       }

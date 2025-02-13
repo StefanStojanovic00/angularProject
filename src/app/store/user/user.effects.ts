@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mergeMap, map, catchError, of } from 'rxjs';
 import { UserService } from '../../services/user/user.service';
 import * as UserActions from './user.actions';
-import { LoginUser } from '../../models/user';
+import { LoginUser, User } from '../../models/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { setToken, SetUser } from '../../auth/user-context';
@@ -105,6 +105,26 @@ export class UserEffects {
         )
       )
     );
+
+
+    editUser$ =createEffect(()=>
+    
+    this.actions$.pipe(ofType(UserActions.userEdit),
+    mergeMap(({user})=>
+    this.userService.editProfil(user).pipe(
+      map((user2:User)=>{
+        this.snackBar.open('Uspesno izmenjen profil','Ok', {duration:5000,});
+        SetUser(user2);
+        return UserActions.userEditSuccess({user:user2});
+      }),
+      catchError(({ error }) => {
+        this.snackBar.open('Greška na strani servera', 'Zatvori', {
+          duration: 3000,
+        });
+        return of({ type: error });
+      })
+    ))
+    ))
 
 
 

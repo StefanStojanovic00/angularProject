@@ -11,3 +11,14 @@
     width: 150px;
     height: 150px;
   }
+  .edit-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  .info-div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 10px;
+  }

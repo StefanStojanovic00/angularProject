@@ -20,10 +20,18 @@
     Admin panel
   </button>
   <div class="login-div">
-    <span class="logged-text" *ngIf="user"
-      >{{ "Prijavljen kao " + user.firstName + " " + user.lastName }}
-    </span>
-    <button mat-raised-button color="accent" (click)="handleLog()">
+    <img *ngIf="this.user" mat-card-avatar
+    [src]="this.user.imagePath
+        ? this.baseUrl + this.user.imagePath
+        : '../../../assets/common/defaultUser.png'"
+    alt=""
+    style="cursor: pointer"
+    (click)="navigate('myAds')"
+  />
+  <span class="logged-text" *ngIf="user" (click)="navigate('myAds')">
+    {{ user.firstName + " " + user.lastName }}
+  </span>
+    <button mat-raised-button color="accent" (click)="handleLog()" style="margin-left: 15px">
       {{ user ? "Odjavi se" : "Prijavi se" }}
     </button>
   </div>

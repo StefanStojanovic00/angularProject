@@ -1,0 +1,95 @@
+<div class="edit-cont">
+    <mat-card-title>Izmena ličnih podataka</mat-card-title>
+    <mat-card-subtitle style="margin-bottom: 0px"
+      >Podaci koji se prikazuju na oglasima koje ste vi
+      kreirali.</mat-card-subtitle
+    >
+    <img
+      mat-card-avatar
+      [src]="
+        this.imagePreview
+          ? this.imagePreview
+          : this.user && this.user.imagePath
+          ? this.baseUrl + this.user.imagePath
+          : '../../../assets/common/defaultUser.png'
+      "
+      alt=""
+      class="user-pic"
+    />
+    <mat-chip-listbox style="margin-top: 5px">
+      <mat-chip *ngIf="this.selectedImage" (removed)="removeImage()" color="primary" selected
+        >{{ this.selectedImage?.name}}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button></mat-chip
+      >
+    </mat-chip-listbox>
+    <button
+      *ngIf="!this.selectedImage"
+      mat-stroked-button
+      color="primary"
+      type="button"
+      (click)="fileInput.click()"
+    >
+      <span>Dodaj fotografiju</span>
+      <input
+        #fileInput
+        type="file"
+        accept="image/*"
+        required
+        (change)="handleSelectedImage($event)"
+        style="display: none"
+      />
+    </button>
+    <form class="form">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Ime</mat-label>
+          <input
+            type="text"
+            matInput
+            [formControl]="firstName"
+            required
+            placeholder="Ime"
+          />
+          <mat-error *ngIf="firstName.invalid"> Unesite ime. </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="margin-left: 10px">
+          <mat-label>Prezime</mat-label>
+          <input
+            type="text"
+            [formControl]="lastName"
+            required
+            matInput
+            placeholder="Prezime"
+          />
+          <mat-error *ngIf="lastName.invalid"> Unesite prezime. </mat-error>
+        </mat-form-field>
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Broj telefona</mat-label>
+        <input
+          type="text"
+          name="phone"
+          matInput
+          [formControl]="phone"
+          required
+          placeholder="+381"
+        />
+        <mat-error *ngIf="phone.invalid"> Unesite broj telefona. </mat-error>
+      </mat-form-field>
+    </form>
+    <div>
+      <button mat-stroked-button color="accent" (click)="handleClose()">
+        Otkaži
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        style="margin-left: 10px"
+        (click)="handleEdit()"
+      >
+        Sačuvaj izmene
+      </button>
+    </div>
+  </div>

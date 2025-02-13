@@ -16,7 +16,7 @@
                 [src]="
                   this.ad?.gallery === null
                     ? '../../../assets/common/noImage.png'
-                    : imgPath + preview
+                    : baseUrl + preview
                     
                 "
                 alt="nst"
@@ -38,7 +38,7 @@
                 [src]="
                   this.ad?.gallery === null
                     ? '../../../assets/common/noImage.png'
-                    : imgPath + preview
+                    : baseUrl + preview
                 "
                 alt="nst"
                 class="slide-img"
@@ -111,7 +111,7 @@
             [src]="
               !this.ad?.createdBy?.imagePath
                 ? '../../../assets/common/defaultUser.png'
-                : this.ad?.createdBy?.imagePath
+                : baseUrl + this.ad?.createdBy?.imagePath
             "
             alt="user"
             class="user-img"

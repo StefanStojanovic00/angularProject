@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { NgIf,NgFor } from '@angular/common';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
@@ -6,7 +6,7 @@ import {CdkDragDrop, DragDropModule,moveItemInArray  } from '@angular/cdk/drag-d
 import { NavbarComponent } from "../navbar/navbar.component";
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormBuilder, FormControl,FormGroup,Validators } from '@angular/forms';
+import { FormBuilder, FormControl,FormGroup,ReactiveFormsModule,Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Category } from '../../models/category';
@@ -26,7 +26,7 @@ import { getUser } from '../../auth/user-context';
 
 @Component({
   selector: 'app-create-ad',
-  imports: [SlickCarouselModule,MatStepperModule, MatSelectModule, DragDropModule, NavbarComponent,MatCardModule,MatFormFieldModule,NgFor,NgIf,MatInputModule,MatIconModule,MatDividerModule ],
+  imports: [ReactiveFormsModule,SlickCarouselModule,MatStepperModule, MatSelectModule, DragDropModule, NavbarComponent,MatCardModule,MatFormFieldModule,NgFor,NgIf,MatInputModule,MatIconModule,MatDividerModule ],
   templateUrl: './create-ad.component.html',
   styleUrl: './create-ad.component.css'
 })
@@ -35,10 +35,8 @@ export class CreateAdComponent implements OnInit{
 
   user:  User | null= null;
 
-  constructor(private _formBuilder: FormBuilder,
-    private store: Store<AppState>){}
 
-    dataFormGroup!: FormGroup;
+   _formBuilder= inject(FormBuilder);
   
 
   imagesFormContorl = new FormControl<String | null> (null,Validators.required);
@@ -47,6 +45,12 @@ export class CreateAdComponent implements OnInit{
 
   categories: Category[] = [];
 
+  dataFormGroup = this._formBuilder.group({
+    titleControl: ['', Validators.required],
+    priceControl: [0, Validators.max(100000)],
+    brandControl: ['', Validators.required],
+    descControl: ['', Validators.required],
+  });
 
   previews: string[] = [];
   sliderPrev: string[] = [];
@@ -62,6 +66,7 @@ export class CreateAdComponent implements OnInit{
   file: File | null = null;
  
 
+  constructor(private store: Store<AppState>){}
 
  
   ngOnInit():void{
@@ -74,13 +79,7 @@ export class CreateAdComponent implements OnInit{
       
         this.user=state.user.user;
 
-      this.dataFormGroup = this._formBuilder.group({
-        titleControl: ['', Validators.required],
-        priceControl: [0, Validators.max(10000)],
-        brandControl: ['', Validators.required],
-        caliberControl: ['', Validators.required],
-        descControl: ['', Validators.required],
-      });
+     
 
       
       

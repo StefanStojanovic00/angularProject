@@ -12,6 +12,7 @@ import { logoutUser } from '../../store/user/user.actions';
 import { NgFor, NgIf } from '@angular/common';
 import { selectCategoryList } from '../../store/category/category.selector';
 import { AppState } from '../../app.state';
+import { environment } from '../../../enviroments/enviroment';
 
 @Component({
   selector: 'app-navbar',
@@ -27,6 +28,7 @@ export class NavbarComponent implements OnInit {
     {
 
     }
+    baseUrl: string = environment.api + '/';
 
     ngOnInit():void
     {

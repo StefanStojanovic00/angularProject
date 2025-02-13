@@ -9,7 +9,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {NgIf} from '@angular/common';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import {  Router } from '@angular/router';
 import { AppState } from '../../app.state';
 
@@ -17,7 +17,7 @@ import { AppState } from '../../app.state';
 
 @Component({
   selector: 'app-login',
-  imports: [MatCardModule,MatFormFieldModule,MatProgressBarModule, MatInputModule, MatIconModule, MatButtonModule,NgIf],
+  imports: [ReactiveFormsModule,MatCardModule,MatFormFieldModule,MatProgressBarModule, MatInputModule, MatIconModule, MatButtonModule,NgIf],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -42,13 +42,19 @@ export class LoginComponent implements OnInit{
   handleSubmit()
   {
     if(!this.email.value || !this.password.value) return;
+    
+    
+    
 
     this.store.dispatch(
       loginUser({
+       
         email:this.email.value,
         password:this.password.value,
       })
     );
+
+    this.navigate('home');
   };
 
   navigate(path:string) {

@@ -32,7 +32,8 @@ export class LightingAdDetailsComponent implements OnInit {
   slideConfig = { slidesToShow: 1, slidesToScroll: 1 };
   slideConfigSmall = { slidesToShow: 5, slidesToScroll: 5 };
 
-  imgPath: string = environment.api + '/';
+  
+  baseUrl: string = environment.api + '/';
 
   constructor(private route:ActivatedRoute, private router: Router,private store: Store<AppState>){
     

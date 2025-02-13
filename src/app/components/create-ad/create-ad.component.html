@@ -8,7 +8,7 @@
           <h3>Odaberite kategoriju.</h3>
           <mat-form-field appearance="outline">
             <mat-label>Kategorija</mat-label>
-            <mat-select formControl="categoryControl" required>
+            <mat-select [formControl]="categoryControl" required>
               <mat-option
                 *ngFor="let category of categories"
                 [value]="category.id"
@@ -28,7 +28,7 @@
         </form>
       </mat-step>
       <mat-step [stepControl]="dataFormGroup" label="Popunite podatke">
-        <form formGroup="dataFormGroup" class="form-div">
+        <form [formGroup]="dataFormGroup" class="form-div">
           <h1>Sadržaj oglasa</h1>
           <h3>Podaci koji će biti prikazani na oglasu.</h3>
           <div>

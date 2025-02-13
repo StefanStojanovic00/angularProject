@@ -13,7 +13,7 @@
                 type="text"
                 name="name"
                 matInput
-                formControl="firstName"
+                [formControl]="firstName"
                 required
                 placeholder="Ime"
               />
@@ -24,7 +24,7 @@
               <input
                 type="text"
                 name="lastName"
-                formControl="lastName"
+                [formControl]="lastName"
                 required
                 matInput
                 placeholder="Prezime"
@@ -39,7 +39,7 @@
               name="email"
               matInput
               placeholder="vašemail@gmail.com"
-              formControl="email"
+              [formControl]="email"
               required
             />
             <mat-icon matSuffix color="primary">mail</mat-icon>
@@ -57,7 +57,7 @@
             <input
               type="password"
               name="password"
-              formControl="password"
+              [formControl]="password"
               matInput
               required
               placeholder="******"
@@ -72,7 +72,7 @@
               type="text"
               name="phone"
               matInput
-              formControl="phone"
+              [formControl]="phone"
               required
               placeholder="+381"
             />

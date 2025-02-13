@@ -12,17 +12,25 @@ export class UserService {
 
   login(email:string,password:string)
   {
-    return this.httpClient.post<LoginUser>(`${environment.api}/users/login`, {
+    return this.httpClient.post<LoginUser>(`${environment.api}/user/login`, {
       email,
       password,
     });
   }
   register(data: RegisterUser) {
-    return this.httpClient.post<User>(`${environment.api}/users/register`, {
+    return this.httpClient.post<User>(`${environment.api}/user/register`, {
       ...data,
     });
   }
   toggleSave(adId: number) {
-    return this.httpClient.get<any>(`${environment.api}/users/toggleSave/${adId}`);
+    return this.httpClient.get<any>(`${environment.api}/user/toggleSave/${adId}`);
+  }
+
+  editProfil(user:FormData)
+  {
+    return this.httpClient.put<User>(`${environment.api}/user/edit-profil/`,{
+      user
+    });
+  
   }
 }
