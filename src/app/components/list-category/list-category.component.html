@@ -1,0 +1,59 @@
+<div class="editor-cont">
+    <div class="header">
+      <mat-card-title style="margin-left: auto">Editor kategorija</mat-card-title>
+      <mat-icon
+        style="cursor: pointer; margin: auto;"
+        (click)="handleClose()"
+        >close</mat-icon
+      >
+    </div>
+    <form class="editor-cont" style="width: 100%; height: 100%">
+      <mat-form-field appearance="outline" style="margin-bottom: 0px">
+        <mat-label>Naziv kategorije</mat-label>
+        <input 
+        matInput 
+        placeholder="Naziv" 
+        required
+        [formControl]="name" />
+        <mat-error *ngIf="this.name.invalid">Unesite naziv kategorije.</mat-error>
+      </mat-form-field>
+      <div>
+        <button
+          mat-stroked-button          
+          (click)="handleCancel()"
+          *ngIf="this.edit"
+          style="margin-right: 20px"
+        >
+          Otkaži
+        </button>
+        <button
+          mat-raised-button
+          (click)="handleSubmit()"
+        >
+          {{ this.edit ? "Izmeni" : "Kreiraj" }}
+        </button>
+      </div>
+    </form>
+    <div class="list-div">
+      <div
+        class="list-item-div"
+        *ngFor="let category of this.categories"
+        #div
+        [id]="category.id"
+      >
+        <span class="text">{{ category.name }}</span>
+        <div class="btns-div">
+          <button mat-mini-fab color="primary" 
+          (click)="handleEdit(div.id)">
+            <mat-icon>edit</mat-icon></button
+          ><button
+            mat-mini-fab
+            color="accent"
+            style="margin-left: 10px"
+            (click)="handleDelete(div.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

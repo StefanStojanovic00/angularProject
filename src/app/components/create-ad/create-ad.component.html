@@ -213,7 +213,9 @@
 
                 <img
                   mat-card-avatar
-                  [src]="!this.user?.imagePath ? '../../../assets/common/defaultUser.png' : this.user?.imagePath"
+                  [src]=" this.user && this.user.imagePath
+                  ? baseUrl + this.user.imagePath
+                  : '../../../assets/common/defaultUser.png'"
                   alt="user"
                   class="user-img"
                 />

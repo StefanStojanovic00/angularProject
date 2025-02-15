@@ -22,6 +22,7 @@ import { selectCategoryList  } from '../../store/category/category.selector';
 import { loadCategories } from '../../store/category/category.action';
 import { AppState } from '../../app.state';
 import { getUser } from '../../auth/user-context';
+import { environment } from '../../../enviroments/enviroment';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class CreateAdComponent implements OnInit{
 
 
    _formBuilder= inject(FormBuilder);
-  
+   baseUrl: string = environment.api + '/';
 
   imagesFormContorl = new FormControl<String | null> (null,Validators.required);
   categoryControl = new FormControl<String | null>(null, Validators.required);
@@ -64,7 +65,7 @@ export class CreateAdComponent implements OnInit{
 
   imagesSelected: boolean = false;
   file: File | null = null;
- 
+
 
   constructor(private store: Store<AppState>){}
 
@@ -73,7 +74,7 @@ export class CreateAdComponent implements OnInit{
     this.store.select(selectCategoryList ).subscribe((categories)=>
  
       (this.categories=categories));
-      this.store.dispatch(loadCategories());
+      //this.store.dispatch(loadCategories());
     this.store.subscribe((state)=>{
 
       

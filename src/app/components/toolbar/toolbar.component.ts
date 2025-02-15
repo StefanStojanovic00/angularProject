@@ -48,7 +48,7 @@ export class ToolbarComponent implements OnInit {
     this.store.select(selectCategoryList ).subscribe((categories)=>
      
           (this.categories=categories));
-          this.store.dispatch(loadCategories());
+          //this.store.dispatch(loadCategories());
   }
 
   

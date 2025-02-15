@@ -24,4 +24,21 @@ export class CategoryService {
   );*/
 
   }
+
+  create(name: string) {
+    return this.httpClient.post<Category>(`${environment.api}/category`, {
+      name,
+    });
+  }
+
+  update(id: string, name: string) {
+    return this.httpClient.put<any>(`${environment.api}/category`, {
+      id,
+      name,
+    });
+  }
+
+  delete(id: string) {
+    return this.httpClient.delete<any>(`${environment.api}/category/${id}`);
+  }
 }

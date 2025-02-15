@@ -19,5 +19,23 @@ export const initialState: CategoryState = adapter.getInitialState({});
 
       return adapter.setAll(categories, state);
         
+    }), 
+    on(categoryAction.createCategorySuccess, (state, { category }) => {
+      return adapter.addOne(category, state);
     }),
+    on(categoryAction.deleteCategorySuccess, (state, { id }) => {
+      return adapter.removeOne(id, state);
+    }),
+    on(categoryAction.updateCategorySuccess, (state, { id, name }) => {
+      return adapter.updateOne(
+        {
+          id: id,
+          changes: {
+            ...state.entities[id],
+            name: name,
+          },
+        },
+        state
+      );
+    })
   );

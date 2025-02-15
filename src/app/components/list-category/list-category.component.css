@@ -1,0 +1,24 @@
+.editor-cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; 
+    height: 100%
+}
+.list-div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+.list-item-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 10px;
+}
+.text {
+    font-size: large;
+}

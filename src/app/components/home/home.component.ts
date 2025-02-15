@@ -14,10 +14,11 @@ import { loadAds } from '../../store/lighting-ad/lighting-ad.actions';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { AppState } from '../../app.state';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
-
+import {MatIconModule} from '@angular/material/icon';
+import { AdminPanelComponent } from "../admin-panel/admin-panel.component";
 @Component({
   selector: 'app-home',
-  imports: [ToolbarComponent,MatToolbarModule, MatMenuModule, NgIf, NgFor, FeedComponent, NavbarComponent],
+  imports: [MatIconModule, ToolbarComponent, MatToolbarModule, MatMenuModule, NgIf, NgFor, FeedComponent, NavbarComponent, AdminPanelComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

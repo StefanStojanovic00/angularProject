@@ -10,14 +10,16 @@
       <button mat-menu-item>{{ category.name }}</button>
     </div>
   </mat-menu>
-  <button mat-button (click)="navigate('saved-ads')">Sačuvani oglasi</button>
-  <button mat-button (click)="navigate('myAds')">Moji oglasi</button>
+  <button mat-button  (click)="navigate('saved-ads')"><fa-icon [icon]="IconBookmark"></fa-icon> Sačuvani oglasi</button>
+  <button mat-button (click)="navigate('myAds')"><mat-icon>contact_page</mat-icon> Moji oglasi</button>
   <button
     mat-button
     (click)="navigate('admin-panel')"
     *ngIf="this.user && this.user.role === 'admin'"
-  >
-    Admin panel
+  ><mat-icon
+  ><span class="material-symbols-outlined">admin_panel_settings
+  </span></mat-icon
+>Admin panel
   </button>
   <div class="login-div">
     <img *ngIf="this.user" mat-card-avatar
@@ -32,6 +34,7 @@
     {{ user.firstName + " " + user.lastName }}
   </span>
     <button mat-raised-button color="accent" (click)="handleLog()" style="margin-left: 15px">
+      <mat-icon>{{ user ? "logout" : "login" }}</mat-icon>
       {{ user ? "Odjavi se" : "Prijavi se" }}
     </button>
   </div>

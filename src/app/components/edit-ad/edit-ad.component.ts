@@ -35,6 +35,7 @@ export class EditAdComponent implements OnInit {
   previews:string[]= [];
   imgPath:string =environment.api+'/';
   selectedFiles?:FileList;
+  selectedFileNames: string[] = [];
 
   constructor(private store:Store<AppState>, private route:ActivatedRoute)
   {}
@@ -46,7 +47,7 @@ export class EditAdComponent implements OnInit {
 
 
     this.store.dispatch(loadOneAd({adId:this.adId}));
-    this.store.dispatch(loadCategories());
+    //this.store.dispatch(loadCategories());
     this.store.select(selectCategoryList ).subscribe((categories)=>
      (this.categories=categories));
 
@@ -61,7 +62,9 @@ export class EditAdComponent implements OnInit {
         this.brand = this.ad.brand;
         this.description = this.ad.description;
         this.selectedCategory = this.ad.category.id;
-        this.previews = this.ad.gallery;
+        if (this.previews.length === 0) {
+          this.ad.gallery.forEach((img) => this.previews.push(img));
+        }
       }
     })
      
@@ -79,12 +82,13 @@ export class EditAdComponent implements OnInit {
       });
     }
 
-    if(this.selectedFiles)
-    {
-      for(let i=0;i<this.selectedFiles.length;i++)
-      {
-        formData.append('images',this.selectedFiles[i]);
-      }
+    if (this.selectedFiles && this.selectedFileNames) {
+      this.selectedFileNames.forEach((img) => {
+        for (let i = 0; i < this.selectedFiles!.length; i++) {
+          if (img == this.selectedFiles![i].name)
+            formData.append('images', this.selectedFiles![i]);
+        }
+      });
     }
 
     formData.append('id', String(this.ad?.id));
@@ -116,6 +120,7 @@ export class EditAdComponent implements OnInit {
                 this.previews.push(ev.target.result);
               };
               reader.readAsDataURL(this.selectedFiles[i]);
+              this.selectedFileNames.push(this.selectedFiles[i].name);
             }
         }
 
@@ -123,7 +128,12 @@ export class EditAdComponent implements OnInit {
 
      drop(event:  CdkDragDrop<string[]>) {
       moveItemInArray(this.previews,event.previousIndex,event.currentIndex);
-      }
+      moveItemInArray(
+        this.selectedFileNames,
+        event.previousIndex,
+        event.currentIndex
+      );  
+    }
 
   setTitle(value: string) {
     if(value === '' || !value) return;
@@ -162,6 +172,7 @@ removeImg(value: string) {
   if(index!==-1)
   {
     this.previews.splice(index,1);
+    this.selectedFileNames.splice(index, 1);
   }
   }
 
