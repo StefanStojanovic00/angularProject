@@ -1,5 +1,5 @@
-import { ApplicationConfig, provideZoneChangeDetection, isDevMode } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { ApplicationConfig, provideZoneChangeDetection, isDevMode, importProvidersFrom } from '@angular/core';
+import { provideRouter, RouterModule } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -18,6 +18,9 @@ import {reducers} from './reducers';
 import { InterceptorService } from './auth/interceptors';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { appStateProviders } from './state';
+import { AuthGuard } from './auth/auth.guard';
+import {  provideAnimations } from '@angular/platform-browser/animations';
+
 
 
 export const appConfig: ApplicationConfig = {
@@ -29,10 +32,13 @@ export const appConfig: ApplicationConfig = {
         useClass: InterceptorService,
         multi: true,
     },
+    provideAnimations(),
     //provideState({name:FeatureKey,reducer:userReducer}),
     provideEffects([UserEffects, lightingAdEffects, CategoryEffects]),
     provideStore(reducers),
+   // importProvidersFrom(RouterModule.forRoot(routes)),
     ...appStateProviders,
+    //importProvidersFrom(StoreModule.forRoot(reducersS)),
     provideHttpClient(withInterceptorsFromDi()),
   provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })]
 };

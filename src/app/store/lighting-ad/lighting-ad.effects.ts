@@ -35,19 +35,16 @@ export class lightingAdEffects
 
     createAd$= createEffect(()=>
     this.actions$.pipe(ofType(LActions.createAd),
-mergeMap((action)=> this.LightingAdService.create(action.formData).pipe(
-    map((res)=>{
-        console.log(res);
-        if(res)
-        {
-            this.router.navigate(['home']);
-            this.snackBar.open(
-                'Uspesno kreiran oglas',
-                'Uredu',
-                { duration: 5000 }
-            );
-        }
-        return LActions.createAdSuccess();
+    mergeMap(({ formData }) =>
+      this.LightingAdService.create(formData).pipe(
+        map((lAd) => {
+          this.snackBar.open('Vaš oglas je uspešno kreiran!', 'Uredu', {
+            duration: 5000,
+          });
+          this.router.navigate([`gun-ad-details/${lAd.id}`], {
+            replaceUrl: true,
+          });
+          return LActions.createAdSuccess({ ad: lAd });
     }),
     catchError(({error})=>{
         console.log(error.message);

@@ -1,54 +1,47 @@
 import { createReducer, on } from "@ngrx/store";
 import { User } from "../../models/user";
 import * as UserActions from './user.actions';
+import { getToken, getUser } from "../../auth/user-context";
 
 
 export interface UserState{
     user: User |null;
-    access_token:string;
+    access_token:string | null;
     loading: boolean;
 }
 
-export const initialStateL:UserState={
-    user:null,
-    access_token:'',
-    loading:false
+export const initialState:UserState={
+    user:getUser(),
+    access_token:getToken(),
+    loading:false,
 };
 
 export const userReducer=createReducer(
-    initialStateL,
-    on(UserActions.loginSuccess, (state, {data}) => ({
+    initialState,
+    on(UserActions.loginUser, (state) => ({
         ...state,
-        user: data.user,
-        access_token:data.access_token,
-        loading:false
+        loading: true,
       })),
-    on(UserActions.loginUser,(state,action)=>({
+      on(UserActions.logoutUser, () => ({
+        user: null,
+        access_token: null,
+        loading: false,
+      })),
+      on(UserActions.loginSuccess, (state, { data }) => ({
+        user: data.user,
+        access_token: data.access_token,
+        loading: false,
+      })),
+      on(UserActions.loginFailure, () => ({
+        user: null,
+        access_token: null,
+        loading: false,
+      })),
+      on(UserActions.registerSuccess, (state) => ({
         ...state,
-        loading:true,
-    })),
-    on(UserActions.loginFailure,(state,action)=>({
-        user:null,
-        access_token:'',
-        loading:false
-    })),
-    on(UserActions.logoutUser, ()=>({
-        user:null,
-        access_token:'',
-        loading:false
-    })),
-    on(UserActions.loginFailure, ()=>(
-        {
-            user:null,
-            access_token:'',
-            loading:false,
-        }
-    )),
-    on(UserActions.registerSuccess, (state)=>({
-        ...state,
-        loading:true
-    })),
-    on(UserActions.registerSuccess, (state) => ({
+        loading: true,
+      })),
+      on(UserActions.registerSuccess, (state) => ({
         ...state,
         loading: false,
       })),
@@ -56,9 +49,9 @@ export const userReducer=createReducer(
         ...state,
         loading: false,
       })),
-      on(UserActions.userEditSuccess, (state,{user})=>({
+      on(UserActions.userEditSuccess, (state, { user }) => ({
         ...state,
-        user:user
-,      }))
+        user: user,
+      }))
 );
 

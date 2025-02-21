@@ -5,7 +5,7 @@ import { AppState } from '../../app.state';
 import { Store } from '@ngrx/store';
 import { selectAdsList } from '../../store/lighting-ad/lighting-ad.selector';
 import { lightingAd } from '../../models/lighting-ad';
-import { loadAds } from '../../store/lighting-ad/lighting-ad.actions';
+import { loadAds, loadMyAds } from '../../store/lighting-ad/lighting-ad.actions';
 import { FeedComponent } from '../feed/feed.component';
 import {MatIconModule} from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,7 +17,8 @@ import { userEdit } from '../../store/user/user.actions';
   selector: 'app-my-ads',
   imports: [MatIconModule,MatCardModule,FeedComponent],
   templateUrl: './my-ads.component.html',
-  styleUrl: './my-ads.component.css'
+  styleUrl: './my-ads.component.css',
+
 })
 export class MyAdsComponent implements OnInit {
 
@@ -30,10 +31,10 @@ export class MyAdsComponent implements OnInit {
   
   
   ngOnInit(): void {
-    this.store.select(selectAdsList ).subscribe((ads)=>
+  /*  this.store.select(selectAdsList ).subscribe((ads)=>
      
-          (this.ads=ads));
-    this.store.dispatch(loadAds());
+          (this.ads=ads));*/
+    this.store.dispatch(loadMyAds());
     this.store.subscribe((state) => {
       this.user = state.user.user;
     });

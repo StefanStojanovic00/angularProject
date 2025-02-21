@@ -16,32 +16,29 @@ import { AppState } from '../../app.state';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
 import {MatIconModule} from '@angular/material/icon';
 import { AdminPanelComponent } from "../admin-panel/admin-panel.component";
+import { selectUser } from '../../store/user/user.selector';
 @Component({
   selector: 'app-home',
-  imports: [MatIconModule, ToolbarComponent, MatToolbarModule, MatMenuModule, NgIf, NgFor, FeedComponent, NavbarComponent, AdminPanelComponent],
+  imports: [MatIconModule, ToolbarComponent, MatToolbarModule, MatMenuModule,  FeedComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
+  
 })
 export class HomeComponent implements OnInit {
 
-
   user:User | null=null;
-
-
-
-
 
   constructor(private store:Store<AppState>,private router:Router){}
 
   ngOnInit():void{
     this.store.dispatch(loadCategories());
     this.store.dispatch(loadAds());
-    this.store.subscribe((state)=>
-    {
-      if(this.user)
-      this.user=state.user.user;
+ 
+
+    this.store.select(selectUser).subscribe((user) => {
+      this.user = user.user;  
     });
-    
+
   }
   navigate(path: string) {
     this.router.navigate([path]);

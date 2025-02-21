@@ -12,7 +12,8 @@ import { AppState } from '../../app.state';
   selector: 'app-feed',
   imports: [LightingAdComponent,CommonModule ],
   templateUrl: './feed.component.html',
-  styleUrl: './feed.component.css'
+  styleUrl: './feed.component.css',
+  
 })
 export class FeedComponent implements OnInit{
     ads:lightingAd[] | null =[];

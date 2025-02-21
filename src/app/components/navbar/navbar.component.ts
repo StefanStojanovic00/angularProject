@@ -15,11 +15,13 @@ import { AppState } from '../../app.state';
 import { environment } from '../../../enviroments/enviroment';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBookmark } from '@fortawesome/free-solid-svg-icons';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-navbar',
-  imports: [MatIconModule,FontAwesomeModule,MatCardModule,MatMenuModule,MatToolbarModule,NgFor,NgIf],
+  imports: [CommonModule,MatIconModule,FontAwesomeModule,MatCardModule,MatMenuModule,MatToolbarModule,NgIf],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrl: './navbar.component.css',
+ 
 })
 export class NavbarComponent implements OnInit {
     user: User | null=null;
@@ -35,12 +37,11 @@ export class NavbarComponent implements OnInit {
     {
       
       this.store.dispatch(loadCategories());
+      
+       
+      this.store.subscribe((state) => (this.user = state.user.user));
        this.store.select(selectCategoryList).subscribe((categories)=>
         (this.categories=categories));
-       
-       /*this.store.subscribe((state)=>{
-        if(this.user)
-        this.user=state.user.user;});*/
 
     
       
@@ -57,7 +58,9 @@ export class NavbarComponent implements OnInit {
       }
     }
     navigate(path: string) {
+      console.log(path);
       this.router.navigate([path]);
     }
+   
     
 }

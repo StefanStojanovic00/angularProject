@@ -12,17 +12,14 @@ import { AuthGuard } from './auth/auth.guard';
 import { MyAdsComponent } from './components/my-ads/my-ads.component';
 import { SavedAdsComponent } from './components/saved-ads/saved-ads.component';
 import { EditAdComponent } from './components/edit-ad/edit-ad.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 
 export const routes: Routes = [
     
-  { path: '', redirectTo: 'login', pathMatch: 'full' }, // Preusmerava na "home"
-  //{ path: 'home', component: HomeComponent }, // Ruta za home komponentu
-  { path: 'login', component: LoginComponent }, // Ruta za login komponentu
-  //ovo trebam napraviti :D
+  
+  { path: 'login', component: LoginComponent}, 
   { path: 'home', component: HomeComponent},
-  { path: 'create-ad', component: CreateAdComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: '**', component: HomeComponent },
+  { path: 'register', component: RegisterComponent }, 
   { path: 'lighting-ad-details/:id',
     component: LightingAdDetailsComponent,
     canActivate: [AuthGuard],
@@ -52,5 +49,13 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     data: { role: Role.User },
   },
+  {
+    path: 'admin',
+    component: AdminPanelComponent,
+    canActivate: [AuthGuard],
+    data: { role: Role.Admin },
+  },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },   
+  { path: '**', component: HomeComponent },
   
 ];

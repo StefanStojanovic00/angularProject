@@ -14,13 +14,14 @@ import { selectCategoryList } from '../../store/category/category.selector';
 import { loadCategories } from '../../store/category/category.action';
 import { selectAdById } from '../../store/lighting-ad/lighting-ad.selector';
 import { CdkDragDrop, moveItemInArray,DragDropModule } from '@angular/cdk/drag-drop';
-
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit-ad',
-  imports: [DragDropModule,MatCardModule,MatFormFieldModule,MatSelectModule,MatIconModule],
+  imports: [CommonModule,DragDropModule,MatCardModule,MatFormFieldModule,MatSelectModule,MatIconModule],
   templateUrl: './edit-ad.component.html',
-  styleUrl: './edit-ad.component.css'
+  styleUrl: './edit-ad.component.css',
+  
 })
 export class EditAdComponent implements OnInit {
   adId: number = 0;

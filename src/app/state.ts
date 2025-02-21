@@ -5,8 +5,8 @@ import { provideState } from "@ngrx/store"
 
 
 export const appStateProviders = [
-    provideState({ name:'user', reducer:userReducer }),
+    provideState({ name:'user', reducer: userReducer }),
     provideState({ name: 'category', reducer: categoryReducer }),
-    provideState({ name:'lightingAd',reducer:lightingAdReducer }),
+    provideState({ name:'lightingAd',reducer: lightingAdReducer }),
 
   ];

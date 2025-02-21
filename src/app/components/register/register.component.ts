@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Router } from '@angular/router';
-
+import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { RegisterUser } from '../../models/user';
 import { registerUser } from '../../store/user/user.actions';
@@ -16,9 +16,9 @@ import { AppState } from '../../app.state';
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule,MatCardModule,MatFormFieldModule,MatProgressBarModule, MatInputModule, MatIconModule, MatButtonModule,NgIf],
+  imports: [CommonModule,ReactiveFormsModule,MatCardModule,MatFormFieldModule,MatProgressBarModule, MatInputModule, MatIconModule, MatButtonModule,NgIf],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrl: './register.component.css',
 })
 export class RegisterComponent implements OnInit {
 

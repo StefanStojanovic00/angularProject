@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { lightingAd } from '../../models/lighting-ad';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from '../../app.state';
@@ -13,13 +13,16 @@ import {MatMenuModule} from '@angular/material/menu';
 import { adminDeleteAd, deleteAd, loadOneAd } from '../../store/lighting-ad/lighting-ad.actions';
 import { toggleSaveAd } from '../../store/user/user.actions';
 import { environment } from '../../../enviroments/enviroment';
-
+import { Dialog } from '@angular/cdk/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { ComponentFixtureAutoDetect } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-lighting-ad-details',
-  imports: [MatMenuModule,MatIconModule,SlickCarouselModule,MatCardModule,MatDividerModule],
+  imports: [CommonModule,MatMenuModule,MatIconModule,SlickCarouselModule,MatCardModule,MatDividerModule],
   templateUrl: './lighting-ad-details.component.html',
-  styleUrl: './lighting-ad-details.component.css'
+  styleUrl: './lighting-ad-details.component.css',
 })
 export class LightingAdDetailsComponent implements OnInit {
 
@@ -38,7 +41,11 @@ export class LightingAdDetailsComponent implements OnInit {
   constructor(private route:ActivatedRoute, private router: Router,private store: Store<AppState>){
     
   }
+   dialog= inject(Dialog);
+    confDialog= inject(MatDialog);
   ngOnInit(): void {
+
+    
     this.route.params.subscribe((params)=>(this.adId=params['id']));
     this.store.dispatch(loadOneAd({ adId: this.adId }))
     this.store.select(selectAdById(this.adId)).subscribe((item)=>{
@@ -47,13 +54,15 @@ export class LightingAdDetailsComponent implements OnInit {
     this.store.subscribe(state => {
       this.user = state.user.user;
     })
+
+    console.log('ad',this.ad);
   }
   handleDelete() {
       if(this.ad!==undefined && this.ad !== null)
         if (this.user?.id === this.ad?.createdBy?.id)
         this.store.dispatch(deleteAd({adId:Number(this.ad.id)}));
   
-        else if (this.user?.role === 'admin') {
+        else if (this.user?.type === 'admin') {
           this.store.dispatch(adminDeleteAd({ adId: Number(this.ad.id) }));
         }
     }
@@ -62,8 +71,22 @@ export class LightingAdDetailsComponent implements OnInit {
         this.router.navigate(['edit-ad/'+this.ad?.id]);
       }
       handleSave() {
-        if (this.ad !== undefined && this.ad !== null)
-          this.store.dispatch(toggleSaveAd({ adId: Number(this.ad.id) }));
+          if(!this.ad) return;
+
+         const confDialogRef= this.confDialog.open(Component,{
+          height:'auto',
+          width:'auto',
+          data:{
+            message:'Da li ste sigurni da zelite da obriste oglas?'
+          },
+         });
+
+         confDialogRef.afterClosed().subscribe((res)=>{
+          if (!res || !res.result || !this.ad) return;
+
+          if(this.user?.id === this.ad.createdBy?.id)
+            this.store.dispatch(deleteAd({adId:Number(this.ad.id)}));
+         })
       }
   
 }

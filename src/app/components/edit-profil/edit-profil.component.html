@@ -11,14 +11,14 @@
           ? this.imagePreview
           : this.user && this.user.imagePath
           ? this.baseUrl + this.user.imagePath
-          : '../../../assets/common/defaultUser.png'
+          : '../../../assets/defaultUser.png'
       "
       alt=""
       class="user-pic"
     />
     <mat-chip-listbox style="margin-top: 5px">
       <mat-chip *ngIf="this.selectedImage" (removed)="removeImage()" color="primary" selected
-        >{{ this.selectedImage?.name}}
+        >{{ this.selectedImage.name}}
         <button matChipRemove>
           <mat-icon>cancel</mat-icon>
         </button></mat-chip

@@ -4,7 +4,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons"
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { User } from '../../models/user';
 import { Category } from '../../models/category';
@@ -20,9 +20,9 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-toolbar',
-  imports: [ReactiveFormsModule,MatChipsModule,MatIconModule,MatInputModule,MatOptionModule, MatCardModule,MatFormFieldModule,MatSelectModule,FontAwesomeModule,NgFor],
+  imports: [CommonModule,ReactiveFormsModule,MatChipsModule,MatIconModule,MatInputModule,MatOptionModule, MatCardModule,MatFormFieldModule,MatSelectModule,FontAwesomeModule,NgFor],
   templateUrl: './toolbar.component.html',
-  styleUrl: './toolbar.component.css'
+  styleUrl: './toolbar.component.css',
 })
 export class ToolbarComponent implements OnInit {
 

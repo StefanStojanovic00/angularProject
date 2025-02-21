@@ -10,7 +10,7 @@ import { FormBuilder, FormControl,FormGroup,ReactiveFormsModule,Validators } fro
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Category } from '../../models/category';
-
+import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
@@ -23,13 +23,15 @@ import { loadCategories } from '../../store/category/category.action';
 import { AppState } from '../../app.state';
 import { getUser } from '../../auth/user-context';
 import { environment } from '../../../enviroments/enviroment';
+import { selectUser } from '../../store/user/user.selector';
 
 
 @Component({
   selector: 'app-create-ad',
-  imports: [ReactiveFormsModule,SlickCarouselModule,MatStepperModule, MatSelectModule, DragDropModule, NavbarComponent,MatCardModule,MatFormFieldModule,NgFor,NgIf,MatInputModule,MatIconModule,MatDividerModule ],
+  imports: [CommonModule,ReactiveFormsModule,SlickCarouselModule,MatStepperModule, MatSelectModule, DragDropModule,MatCardModule,MatFormFieldModule,NgFor,NgIf,MatInputModule,MatIconModule,MatDividerModule ],
   templateUrl: './create-ad.component.html',
-  styleUrl: './create-ad.component.css'
+  styleUrl: './create-ad.component.css',
+  
 })
 export class CreateAdComponent implements OnInit{
 
@@ -40,9 +42,9 @@ export class CreateAdComponent implements OnInit{
    _formBuilder= inject(FormBuilder);
    baseUrl: string = environment.api + '/';
 
-  imagesFormContorl = new FormControl<String | null> (null,Validators.required);
+ // imagesFormContorl = new FormControl<String | null> (null,Validators.required);
   categoryControl = new FormControl<String | null>(null, Validators.required);
-  selectFormControl = new FormControl('', Validators.required);
+  //selectFormControl = new FormControl('', Validators.required);
 
   categories: Category[] = [];
 
@@ -63,38 +65,36 @@ export class CreateAdComponent implements OnInit{
   slideConfig = { slidesToShow: 1, slidesToScroll: 1 };
   slideConfigSmall = { slidesToShow: 5, slidesToScroll: 5 };
 
-  imagesSelected: boolean = false;
-  file: File | null = null;
+  //imagesSelected: boolean = false;
+ // file: File | null = null;
 
 
   constructor(private store: Store<AppState>){}
 
  
   ngOnInit():void{
-    this.store.select(selectCategoryList ).subscribe((categories)=>
- 
-      (this.categories=categories));
+    
       //this.store.dispatch(loadCategories());
-    this.store.subscribe((state)=>{
-
-      
-        this.user=state.user.user;
-
-     
-
-      
-      
-    });
+   /* this.store.subscribe((state)=>{      
+        this.user=state.user.user;      
+    });*/
+     this.store.select(selectUser).subscribe((user) => {
+          this.user = user.user; 
+          console.log('creaAD',this.user);  
+        });
+    
+    this.store.select(selectCategoryList ).subscribe((categories)=>
+      (this.categories=categories));
 
   }
 
 
     handleSelectedFiles(event: any) {
-      this.file = event.target.files[0];
-      this.selectedFileNames = [];
+      //this.file = event.target.files[0];
+      //this.selectedFileNames = event.targer.files;
       this.selectedFiles = event.target.files;
   
-      this.previews = [];
+     // this.previews = [];
       if (this.selectedFiles && this.selectedFiles[0]) {
         const numberOfFiles = this.selectedFiles.length;
         for (let i = 0; i < numberOfFiles; i++) {
@@ -114,11 +114,7 @@ export class CreateAdComponent implements OnInit{
 
   drop(event: CdkDragDrop<any,any,any>) {
     moveItemInArray(this.previews, event.previousIndex, event.currentIndex);
-    moveItemInArray(
-      this.selectedFileNames,
-      event.previousIndex,
-      event.currentIndex
-    );
+    moveItemInArray( this.selectedFileNames,event.previousIndex, event.currentIndex);
     this.sliderPrev = [];
   }
 
@@ -127,7 +123,7 @@ export class CreateAdComponent implements OnInit{
       if (this.previews.length > 0) {
         this.sliderPrev = this.previews;
       } else {
-        this.sliderPrev[0] = '../../../assets/common/noImage.png';
+        this.sliderPrev[0] = '../../../assets/noImage.png';
       }
       }
       

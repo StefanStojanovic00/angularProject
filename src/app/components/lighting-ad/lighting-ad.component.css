@@ -36,7 +36,5 @@
 .price-div {
     display: flex;
     background-color: #3F51B0;
-    color: white;
-    height: 40px;
-    text-align: center;
+    flex-direction: column;
 }

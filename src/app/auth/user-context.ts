@@ -19,8 +19,10 @@ export const getUser= (): User | null =>{
     if(user)
     {
         return JSON.parse(user);
+    }else{
+        return null;
     }
-    return null;
+    
 };
 
 export const setToken= (token:string | null) =>

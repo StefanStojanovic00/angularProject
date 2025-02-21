@@ -59,6 +59,9 @@ export const lightingAdReducer= createReducer(
     {
       return adapter.setAll(ads,state);
     }),
+    on(LActions.createAdSuccess, (state: lightingAdState, { ad }) => {
+      return adapter.addOne(ad, state);
+    }),
     on(LActions.updateAdSeccess, (state:lightingAdState,{ad})=>{
       return adapter.updateOne(
         {

@@ -13,9 +13,12 @@
               name="email"
               [formControl]="email"
               matInput
+              required
               placeholder="vašemail@gmail.com"
             />
             <mat-icon matSuffix>mail</mat-icon>
+            <mat-error *ngIf="email.hasError('required')">Email je obavezan.</mat-error>
+            <mat-error *ngIf="email.hasError('email')">Unesite validan email.</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Lozinka</mat-label>
@@ -27,15 +30,19 @@
               matInput
               placeholder="******"
             />
-            <mat-error *ngIf="password.invalid"> Unesite lozinku. </mat-error>
-          </mat-form-field>
-          <button class="btn" mat-raised-button color="primary" disabled="{{ loading }}" (click)="handleSubmit()">
-            Prijavi se
-          </button>
-          <span class="nav-text-small" (click)="navigate('home')"
-        >Nastavi bez prijave</span>
+            <mat-error *ngIf="email.hasError('required')">Email je obavezan.</mat-error>
+            <mat-error *ngIf="email.hasError('password')">Unesite validan email.</mat-error>
+          </mat-form-field>          
         </form>
-      </mat-card-content>
+
+
+          <div class="button-container">
+            <button class="btn" mat-raised-button color="primary" [disabled]="loading" (click)="handleSubmit()">
+              Prijavi se
+            </button>
+            <span class="nav-text-small" (click)="navigate('home')">Nastavi bez prijave</span>
+          </div>
+    </mat-card-content>   
       <mat-card-footer>
         <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
       </mat-card-footer>

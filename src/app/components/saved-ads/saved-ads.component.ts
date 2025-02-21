@@ -8,7 +8,7 @@ import { loadSavedAds } from '../../store/lighting-ad/lighting-ad.actions';
   selector: 'app-saved-ads',
   imports: [FeedComponent],
   templateUrl: './saved-ads.component.html',
-  styleUrl: './saved-ads.component.css'
+  styleUrl: './saved-ads.component.css',
 })
 export class SavedAdsComponent  implements OnInit{
   

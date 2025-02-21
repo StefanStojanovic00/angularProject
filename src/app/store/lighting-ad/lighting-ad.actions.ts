@@ -11,7 +11,9 @@ export const loadAdsSuccess=createAction(
 
 export const createAd=createAction('createAd', props<{formData:FormData}>());
 
-export const createAdSuccess=createAction('createAdSuccess');
+export const createAdSuccess=createAction('createAdSuccess',
+  props<{ ad: lightingAd }>()
+);
 
 export const loadMyAds = createAction('loadMyAds');
 export const loadMyAdsSuccess = createAction(

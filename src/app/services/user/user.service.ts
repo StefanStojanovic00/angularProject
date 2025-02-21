@@ -4,6 +4,7 @@ import {  LoginUser, RegisterUser, User } from '../../models/user';
 import { environment } from '../../../enviroments/enviroment';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,10 +13,12 @@ export class UserService {
 
   login(email:string,password:string)
   {
+    console.log('Sending login request to server');
     return this.httpClient.post<LoginUser>(`${environment.api}/user/login`, {
       email,
       password,
     });
+    
   }
   register(data: RegisterUser) {
     return this.httpClient.post<User>(`${environment.api}/user/register`, {

@@ -5,16 +5,17 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import { User } from '../../models/user';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-
+import { CommonModule } from '@angular/common';
 import { FormControl, Validators ,ReactiveFormsModule} from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
 import { environment } from '../../../enviroments/enviroment';
 @Component({
   selector: 'app-edit-profil',
-  imports: [MatDialogModule,ReactiveFormsModule,MatCardModule,MatChipsModule,MatFormFieldModule,MatIconModule],
+  imports: [CommonModule,MatDialogModule,ReactiveFormsModule,MatCardModule,MatChipsModule,MatFormFieldModule,MatIconModule],
   templateUrl: './edit-profil.component.html',
-  styleUrl: './edit-profil.component.css'
+  styleUrl: './edit-profil.component.css',
+  
 })
 export class EditProfilComponent implements OnInit {
 

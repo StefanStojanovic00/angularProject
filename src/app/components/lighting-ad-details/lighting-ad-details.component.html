@@ -15,7 +15,7 @@
               <img
                 [src]="
                   this.ad?.gallery === null
-                    ? '../../../assets/common/noImage.png'
+                    ? '../../../assets/noImage.png'
                     : baseUrl + preview
                     
                 "
@@ -37,7 +37,7 @@
               <img
                 [src]="
                   this.ad?.gallery === null
-                    ? '../../../assets/common/noImage.png'
+                    ? '../../../assets/noImage.png'
                     : baseUrl + preview
                 "
                 alt="nst"
@@ -87,7 +87,7 @@
                 </button>
                 <button
                 mat-menu-item
-                *ngIf="this.ad?.createdBy?.id === this.user?.id || this.user?.role==='admin'"
+                *ngIf="this.ad?.createdBy?.id === this.user?.id || this.user?.type==='admin'"
                 (click)="handleDelete()"
               >>
                   <mat-icon color="warn">delete</mat-icon>
@@ -110,7 +110,7 @@
             mat-card-avatar
             [src]="
               !this.ad?.createdBy?.imagePath
-                ? '../../../assets/common/defaultUser.png'
+                ? '../../../assets/defaultUser.png'
                 : baseUrl + this.ad?.createdBy?.imagePath
             "
             alt="user"

@@ -28,8 +28,8 @@ export class LightingAdComponent implements OnInit {
    {}
 
    ngOnInit() : void{
-    this.imgPath+=this.ad?.gallery[0];
-    console.log(this.imgPath);
+  /*  this.imgPath+=this.ad?.gallery[0];
+    console.log(this.imgPath);*/
    }
 
 

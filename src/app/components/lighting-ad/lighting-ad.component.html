@@ -2,7 +2,7 @@
     <div class="img-div">
       <img [src]=" this.ad && this.ad.gallery[0]
           ? imgPath + '/' + this.ad.gallery[0]
-          : '../../../assets/common/noImage.png'"
+          : '../../../assets/noImage.png'"
       alt="nesto" class="img"
     />
     </div>
@@ -10,6 +10,10 @@
       <div class="header-div">
         <div>
           <mat-card-title> {{ ad?.title }}</mat-card-title>
+          <mat-card-subtitle style="margin-bottom: 5px"  > 
+            Kategorija:
+            <strong>{{ ad?.category?.name }}</strong></mat-card-subtitle
+          >
           <mat-card-subtitle>
             {{ ad?.brand }} </mat-card-subtitle
           >
