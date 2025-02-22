@@ -1,0 +1,5 @@
+.edit-cont{
+    display: flex;
+    flex-direction: column;
+    margin:10%;
+}

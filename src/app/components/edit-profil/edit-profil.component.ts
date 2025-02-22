@@ -10,9 +10,13 @@ import { FormControl, Validators ,ReactiveFormsModule} from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
 import { environment } from '../../../enviroments/enviroment';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+
+
 @Component({
   selector: 'app-edit-profil',
-  imports: [CommonModule,MatDialogModule,ReactiveFormsModule,MatCardModule,MatChipsModule,MatFormFieldModule,MatIconModule],
+  imports: [CommonModule,MatDialogModule,ReactiveFormsModule,MatCardModule,MatChipsModule,MatFormFieldModule,MatIconModule,MatInputModule,MatButtonModule ],
   templateUrl: './edit-profil.component.html',
   styleUrl: './edit-profil.component.css',
   

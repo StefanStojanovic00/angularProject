@@ -38,10 +38,10 @@
         accept="image/*"
         required
         (change)="handleSelectedImage($event)"
-        style="display: none"
+        style="display: none;"
       />
     </button>
-    <form class="form">
+    <form class="form" style="margin-top: 5%;">
       <div>
         <mat-form-field appearance="outline">
           <mat-label>Ime</mat-label>
@@ -54,7 +54,7 @@
           />
           <mat-error *ngIf="firstName.invalid"> Unesite ime. </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline" style="margin-left: 10px">
+        <mat-form-field appearance="outline">
           <mat-label>Prezime</mat-label>
           <input
             type="text"
