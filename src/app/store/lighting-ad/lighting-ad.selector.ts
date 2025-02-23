@@ -45,6 +45,5 @@ export const selectAdById=(id:number)=>createSelector(
     (ads)=> {return ads.entities[id];}
 )*/
 export const selectAdById = (id: number) => createSelector(selectAdsFeature, (ads) => {
-   console.log('selectorr:', ads.entities[id]);
     return ads.entities[id];
   });

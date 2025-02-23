@@ -31,10 +31,10 @@ export class UserEffects {
         this.userService.login(email, password).pipe(   
                 
           map((data: LoginUser) => {
-            console.log('uso efekat12134');            
+          
             setToken(data.access_token);
             SetUser(data.user);
-            console.log('uso efekat');
+   
             this.router.navigate(['home'], { replaceUrl: true });
            
             return UserActions.loginSuccess({ data });
@@ -64,7 +64,7 @@ export class UserEffects {
       SetUser(null);
      
       
-     console.log('LOGUT ');
+
       this.router.navigate(['login'], { replaceUrl: true });
       return of(({type:'logged out'}))
     })));
@@ -122,7 +122,7 @@ export class UserEffects {
     mergeMap(({user})=>
     this.userService.editProfil(user).pipe(
       map((user2:User)=>{
-        console.log('edit ef',user2);
+
         this.snackBar.open('Uspesno izmenjen profil','Ok', {duration:5000,});
         SetUser(user2);
         return UserActions.userEditSuccess({user:user2});

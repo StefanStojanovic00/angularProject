@@ -50,18 +50,16 @@ export class LightingAdDetailsComponent implements OnInit {
     
     this.route.params.subscribe((params)=>(this.adId=params['id']));
 
-    console.log('cascw',this.adId);
+
     this.store.dispatch(loadOneAd({ adId: this.adId }))
     this.store.select(selectAdById(this.adId)).subscribe((item)=>{
-      console.log('item',item);
+
       this.ad=item;
     });
     this.store.select(selectUser).subscribe((user) => {
          this.user = user.user;  
        });
 
-    console.log('user Brajko',this.user);
-    console.log('ad',this.ad);
   }
   handleDelete() {
       if(this.ad!==undefined && this.ad !== null)

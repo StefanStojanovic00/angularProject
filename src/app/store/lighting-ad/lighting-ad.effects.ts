@@ -154,7 +154,7 @@ export class lightingAdEffects
           map((ad)=>{
             if(ad)
             {
-              this.router.navigate(['lighting-ad-details/${ad.id}'],{replaceUrl:true});
+              this.router.navigate(['lighting-ad-details/'+ad.id],{replaceUrl:true});
               this.snackBar.open('Izmenjen oglas','Ok',{duration:5000});
               
             }

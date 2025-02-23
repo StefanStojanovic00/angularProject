@@ -15,10 +15,12 @@ import { loadCategories } from '../../store/category/category.action';
 import { selectAdById } from '../../store/lighting-ad/lighting-ad.selector';
 import { CdkDragDrop, moveItemInArray,DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-edit-ad',
-  imports: [CommonModule,DragDropModule,MatCardModule,MatFormFieldModule,MatSelectModule,MatIconModule],
+  imports: [CommonModule,DragDropModule,MatCardModule,MatFormFieldModule,MatSelectModule,MatIconModule,MatButtonModule, MatInputModule ],
   templateUrl: './edit-ad.component.html',
   styleUrl: './edit-ad.component.css',
   

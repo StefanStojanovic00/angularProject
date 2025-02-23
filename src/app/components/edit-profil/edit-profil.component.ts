@@ -66,7 +66,7 @@ export class EditProfilComponent implements OnInit {
       phone:this.phone.value,
       image: this.selectedImage
     };
-    console.log('edit uSer',editUser);
+
     this.dialogRef.close(editUser);
   }
 
