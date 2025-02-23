@@ -16,9 +16,10 @@ import { environment } from '../../../enviroments/enviroment';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule,MatIconModule,FontAwesomeModule,MatCardModule,MatMenuModule,MatToolbarModule,NgIf],
+  imports: [CommonModule,MatIconModule,FontAwesomeModule,MatCardModule,MatMenuModule,MatToolbarModule,NgIf,MatButtonModule ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
  

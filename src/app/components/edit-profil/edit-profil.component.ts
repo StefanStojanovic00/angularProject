@@ -12,6 +12,7 @@ import { AppState } from '../../app.state';
 import { environment } from '../../../enviroments/enviroment';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { selectUser } from '../../store/user/user.selector';
 
 
 @Component({
@@ -41,15 +42,19 @@ export class EditProfilComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.store.subscribe((state)=>{
-      this.user=state.user.user;
+   /* this.store.subscribe((state)=>{
+      this.user=state.user.user;*/
+      this.store.select(selectUser).subscribe((user) => {
+            this.user = user.user;  
+          });
+      
       if(this.user)
       {
         this.firstName.setValue(this.user.firstName);
         this.lastName.setValue(this.user.lastName);
         this.phone.setValue(this.user.phone);
       }
-    });
+  
   }
 
 
@@ -61,6 +66,7 @@ export class EditProfilComponent implements OnInit {
       phone:this.phone.value,
       image: this.selectedImage
     };
+    console.log('edit uSer',editUser);
     this.dialogRef.close(editUser);
   }
 

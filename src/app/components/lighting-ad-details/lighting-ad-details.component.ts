@@ -17,10 +17,12 @@ import { Dialog } from '@angular/cdk/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { selectUser } from '../../store/user/user.selector';
 
 @Component({
   selector: 'app-lighting-ad-details',
-  imports: [CommonModule,MatMenuModule,MatIconModule,SlickCarouselModule,MatCardModule,MatDividerModule],
+  imports: [MatButtonModule,CommonModule,MatMenuModule,MatIconModule,SlickCarouselModule,MatCardModule,MatDividerModule],
   templateUrl: './lighting-ad-details.component.html',
   styleUrl: './lighting-ad-details.component.css',
 })
@@ -47,14 +49,18 @@ export class LightingAdDetailsComponent implements OnInit {
 
     
     this.route.params.subscribe((params)=>(this.adId=params['id']));
+
+    console.log('cascw',this.adId);
     this.store.dispatch(loadOneAd({ adId: this.adId }))
     this.store.select(selectAdById(this.adId)).subscribe((item)=>{
+      console.log('item',item);
       this.ad=item;
     });
-    this.store.subscribe(state => {
-      this.user = state.user.user;
-    })
+    this.store.select(selectUser).subscribe((user) => {
+         this.user = user.user;  
+       });
 
+    console.log('user Brajko',this.user);
     console.log('ad',this.ad);
   }
   handleDelete() {

@@ -31,9 +31,8 @@ export class UserService {
 
   editProfil(user:FormData)
   {
-    return this.httpClient.put<User>(`${environment.api}/user/edit-profil/`,{
-      user
-    });
+
+    return this.httpClient.put<User>(`${environment.api}/user/edit-profil/`, user);
   
   }
 }

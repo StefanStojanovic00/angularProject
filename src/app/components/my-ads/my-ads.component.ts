@@ -53,10 +53,13 @@ export class MyAdsComponent implements OnInit {
 
       const formData: FormData =new FormData();
 
-      formData.append('image',dig.image);
       formData.append('firstName', dig.firstName);
       formData.append('lastName', dig.lastName);
       formData.append('phone', dig.phone);
+      formData.append('image',dig.image);
+      
+      
+      
 
       this.store.dispatch(userEdit({ user: formData }));
         

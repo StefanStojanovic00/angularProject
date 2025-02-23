@@ -7,6 +7,7 @@ import { Role } from '../enum/role';
 import { select, State, Store } from '@ngrx/store';
 import { AppState } from '../app.state';
 import { firstValueFrom, take } from 'rxjs';
+import { selectUser } from '../store/user/user.selector';
 
 
 
@@ -23,10 +24,15 @@ export const AuthGuard: CanActivateFn = async (route:ActivatedRouteSnapshot, sta
   function getFromUserStore():User |null {
     let user: User | null = null;
       
-      store.subscribe((st)=>{
+    store.select(selectUser).subscribe((user2) => {
+          user = user2.user;  
+          console.log('auth',user);
+        });
+    
+    /*  store.subscribe((st)=>{
         user=st.user.user;
         console.log('auth',user);
-      })
+      })*/
       
       return user;
   }

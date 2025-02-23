@@ -122,6 +122,7 @@ export class UserEffects {
     mergeMap(({user})=>
     this.userService.editProfil(user).pipe(
       map((user2:User)=>{
+        console.log('edit ef',user2);
         this.snackBar.open('Uspesno izmenjen profil','Ok', {duration:5000,});
         SetUser(user2);
         return UserActions.userEditSuccess({user:user2});

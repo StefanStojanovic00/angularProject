@@ -28,10 +28,10 @@
         ? this.baseUrl + this.user.imagePath
         : '../../../assets/defaultUser.png'"
     alt=""
-    style="cursor: pointer"
+    style="cursor: pointer; height:40px;height: 40px;margin:5px;"
     (click)="navigate('myAds')"
   />
-  <span class="logged-text" *ngIf="user" (click)="navigate('myAds')">
+  <span class="logged-text" *ngIf="user" style="margin-top:10px;" (click)="navigate('myAds')">
     {{ user.firstName + " " + user.lastName }}
   </span>
     <button mat-raised-button color="accent" (click)="handleLog()" style="margin-left: 15px">
