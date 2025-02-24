@@ -5,7 +5,7 @@ import { MatSelectModule } from '@angular/material/select';
 import {CdkDragDrop, DragDropModule,moveItemInArray  } from '@angular/cdk/drag-drop';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatError, MatFormFieldModule } from '@angular/material/form-field';
 import { FormBuilder, FormControl,FormGroup,ReactiveFormsModule,Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -24,11 +24,13 @@ import { AppState } from '../../app.state';
 import { getUser } from '../../auth/user-context';
 import { environment } from '../../../enviroments/enviroment';
 import { selectUser } from '../../store/user/user.selector';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @Component({
   selector: 'app-create-ad',
-  imports: [CommonModule,ReactiveFormsModule,SlickCarouselModule,MatStepperModule, MatSelectModule, DragDropModule,MatCardModule,MatFormFieldModule,NgFor,NgIf,MatInputModule,MatIconModule,MatDividerModule ],
+  imports: [MatTooltipModule,MatError,MatButtonModule,CommonModule,ReactiveFormsModule,SlickCarouselModule,MatStepperModule, MatSelectModule, DragDropModule,MatCardModule,MatFormFieldModule,NgFor,NgIf,MatInputModule,MatIconModule,MatDividerModule ],
   templateUrl: './create-ad.component.html',
   styleUrl: './create-ad.component.css',
   
@@ -42,9 +44,9 @@ export class CreateAdComponent implements OnInit{
    _formBuilder= inject(FormBuilder);
    baseUrl: string = environment.api + '/';
 
- // imagesFormContorl = new FormControl<String | null> (null,Validators.required);
+ 
   categoryControl = new FormControl<String | null>(null, Validators.required);
-  //selectFormControl = new FormControl('', Validators.required);
+ 
 
   categories: Category[] = [];
 
@@ -65,36 +67,47 @@ export class CreateAdComponent implements OnInit{
   slideConfig = { slidesToShow: 1, slidesToScroll: 1 };
   slideConfigSmall = { slidesToShow: 5, slidesToScroll: 5 };
 
-  //imagesSelected: boolean = false;
- // file: File | null = null;
+  
 
+  
 
   constructor(private store: Store<AppState>){}
 
  
   ngOnInit():void{
     
-      //this.store.dispatch(loadCategories());
-   /* this.store.subscribe((state)=>{      
-        this.user=state.user.user;      
-    });*/
      this.store.select(selectUser).subscribe((user) => {
           this.user = user.user; 
-          console.log('creaAD',this.user);  
+          console.log('🔵 User data loaded:', this.user);  
         });
-    
-    this.store.select(selectCategoryList ).subscribe((categories)=>
-      (this.categories=categories));
 
+    this.store.select(selectCategoryList).subscribe((categories)=>
+      (this.categories=categories));
+    
+    console.log('🔵 Categories loaded:', this.categories);
+    
+
+    if (this.categoryControl.value === null && this.categories.length > 0) {
+      console.log('🔵 Categories loaded 0:', this.categories[0].id);
+      this.categoryControl.setValue(this.categories[0].id);
+    };
+
+    this.categoryControl.valueChanges.subscribe((value) => {
+    console.log('📌 Izabrana kategorija ID:', value);
+      });
+
+      console.log('Category Control Valid:', this.categoryControl.valid);
+    console.log('Data Form Group Valid:', this.dataFormGroup.valid);
   }
+  
 
 
     handleSelectedFiles(event: any) {
-      //this.file = event.target.files[0];
-      //this.selectedFileNames = event.targer.files;
       this.selectedFiles = event.target.files;
   
-     // this.previews = [];
+
+     console.log('📸 Selected files:', this.selectedFiles);
+
       if (this.selectedFiles && this.selectedFiles[0]) {
         const numberOfFiles = this.selectedFiles.length;
         for (let i = 0; i < numberOfFiles; i++) {
@@ -103,6 +116,7 @@ export class CreateAdComponent implements OnInit{
           reader.onload = (e: any) => {
             
             this.previews.push(e.target.result);
+            console.log('🖼️ File preview added:', e.target.result);
           };
   
           reader.readAsDataURL(this.selectedFiles[i]);
@@ -110,6 +124,7 @@ export class CreateAdComponent implements OnInit{
           this.selectedFileNames.push(this.selectedFiles[i].name);
         }
       }
+      console.log('📸 Updated previews:', this.previews);
     }
 
   drop(event: CdkDragDrop<any,any,any>) {
@@ -122,8 +137,10 @@ export class CreateAdComponent implements OnInit{
     refresh() {
       if (this.previews.length > 0) {
         this.sliderPrev = this.previews;
+        console.log('🔄 Slider updated with previews:', this.sliderPrev);
       } else {
         this.sliderPrev[0] = '../../../assets/noImage.png';
+        console.log('🔄 No images found, setting default image.');
       }
       }
       
@@ -137,6 +154,7 @@ export class CreateAdComponent implements OnInit{
           for (let i = 0; i < this.selectedFiles.length; i++) {
             if (img == this.selectedFiles[i].name)
               formData.append('images', this.selectedFiles[i]);
+            console.log('📤 Added image to FormData:', this.selectedFiles[i]);
           }
         });
 
@@ -155,12 +173,17 @@ export class CreateAdComponent implements OnInit{
           formData.append('categoryId', <string>this.categoryControl.value);
           formData.append('description', this.dataFormGroup.controls['descControl'].value!);
       
+  console.log('🚀 Dispatching createAd with FormData:', formData);
           this.store.dispatch(createAd({ formData }));
+          
       }
       
       removeImg(value: string) {
         const index: number = Number(value);
+        console.log('❌ Removing image at index:', index);
       this.previews.splice(index, 1);
       this.selectedFileNames.splice(index, 1);
+
+  console.log('✅ Updated previews after removal:', this.previews);
         }
 }

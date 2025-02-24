@@ -19,13 +19,13 @@
             <mat-error *ngIf="categoryControl.hasError('required')"
               >Odaberite jednu od kategorija iz padajuće liste.</mat-error
             >
-          </mat-form-field>
-          <div style="margin-top: 20px">
-            <button mat-raised-button color="primary" matStepperNext>
-              Dalje
-            </button>
-          </div>
+          </mat-form-field>         
         </form>
+        <div class="btns" style="margin-top: 20px">
+          <button mat-raised-button color="primary" matStepperNext>
+            Dalje
+          </button>
+        </div>
       </mat-step>
       <mat-step [stepControl]="dataFormGroup" label="Popunite podatke">
         <form [formGroup]="dataFormGroup" class="form-div">
@@ -59,7 +59,7 @@
               <mat-label>Brand</mat-label>
               <input
                 matInput
-                placeholder="Browning"
+                placeholder="Brand.."
                 formControlName="brandControl"
                 required
               />
@@ -75,21 +75,21 @@
               formControlName="descControl"
               required
             ></textarea>
-          </mat-form-field>
-          <div>
-            <button mat-stroked-button color="primary" matStepperPrevious>
-              Nazad
-            </button>
-            <button
-              mat-raised-button
-              color="primary"
-              matStepperNext
-              style="margin-left: 20px"
-            >
-              Dalje
-            </button>
-          </div>
+          </mat-form-field>          
         </form>
+        <div class="btns">
+          <button mat-stroked-button color="primary" matStepperPrevious>
+            Nazad
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            matStepperNext
+            style="margin-left: 20px"
+          >
+            Dalje
+          </button>
+        </div>
       </mat-step>
       <mat-step label="Dodajte fotografije">
         <form class="form-div">
@@ -137,22 +137,22 @@
               (change)="handleSelectedFiles($event)"
               style="display: none"
             />
-          </button>
-          <div style="margin-top: 30px">
-            <button mat-stroked-button color="primary" matStepperPrevious>
-              Nazad
-            </button>
-            <button
-              mat-raised-button
-              color="primary"
-              matStepperNext
-              style="margin-left: 20px"
-              (click)="refresh()"
-            >
-              Dalje
-            </button>
-          </div>
+          </button>          
         </form>
+        <div class="btns" style="margin-top: 30px">
+          <button mat-stroked-button color="primary" matStepperPrevious>
+            Nazad
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            matStepperNext
+            style="margin-left: 20px"
+            (click)="refresh()"
+          >
+            Dalje
+          </button>
+        </div>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>

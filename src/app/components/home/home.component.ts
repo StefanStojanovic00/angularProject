@@ -17,9 +17,10 @@ import { ToolbarComponent } from '../toolbar/toolbar.component';
 import {MatIconModule} from '@angular/material/icon';
 import { AdminPanelComponent } from "../admin-panel/admin-panel.component";
 import { selectUser } from '../../store/user/user.selector';
+import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-home',
-  imports: [MatIconModule, ToolbarComponent, MatToolbarModule, MatMenuModule,  FeedComponent],
+  imports: [MatIconModule, ToolbarComponent, MatToolbarModule, MatMenuModule,  FeedComponent, MatButtonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   
