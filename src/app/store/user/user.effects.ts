@@ -7,6 +7,8 @@ import { LoginUser, User } from '../../models/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { setToken, SetUser } from '../../auth/user-context';
+import Swal from 'sweetalert2';
+import { icon } from '@fortawesome/fontawesome-svg-core';
 
 /*
 comment why use inject insted constructor :D
@@ -101,8 +103,20 @@ export class UserEffects {
         ofType(UserActions.toggleSaveAd),
         mergeMap(({ adId }) =>
           this.userService.toggleSave(adId).pipe(
-            map(() => {
-              return UserActions.toggleSaveSuccess({ adId: adId });
+            map((response) => {
+              let message = response.saved ? 'Sačuvan oglas' : 'Uklonili ste čuvanje oglasa';
+              let icon: 'success' | 'error' = response.saved ? 'success' : 'error'; 
+
+                Swal.fire({
+                  position: "top-end",
+                  icon: icon,
+                  title: message,
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+              
+                
+              return UserActions.toggleSaveSuccess({ adId: adId, isSaved:response.saved });
             }),
             catchError(() => {
               this.snackBar.open('Greška sa serverske strane', 'Zatvori', {

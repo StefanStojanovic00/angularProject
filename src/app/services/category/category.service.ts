@@ -15,13 +15,7 @@ export class CategoryService {
   {
     return this.httpClient.get<Category[]>(`${environment.api}/category`);
     
-  /* return this.httpClient.get<Category[]>(`${environment.api}/category`).pipe(
-    tap(data => console.log('Podaci primljeni sa servera:', data)), // Loguje odgovor API-ja
-    catchError(error => {
-      console.error('Greška prilikom dohvatanja podataka:', error);
-      return throwError(() => error);
-    })
-  );*/
+  
 
   }
 

@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit{
   ngOnInit(): void {
      this.store.select(selectUser).subscribe((user) => {
           this.loading = user.loading; 
-          console.log('loading Login',this.loading);  
+       
         });
     
   }
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit{
   {
     if(!this.email.value || !this.password.value) return;
     
-    console.log('Dispatching loginUser action');
+    
     this.store.dispatch(      
       loginUser({       
         email:this.email.value,

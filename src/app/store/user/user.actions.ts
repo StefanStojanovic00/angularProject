@@ -34,7 +34,7 @@ export const toggleSaveAd = createAction(
   );
   export const toggleSaveSuccess = createAction(
     'toggleSaveSuccess',
-    props<{ adId: number }>()
+    props<{ adId: number, isSaved:boolean }>()
   );
 
 export const userEdit= createAction(

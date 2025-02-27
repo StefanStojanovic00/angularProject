@@ -63,6 +63,7 @@ export const lightingAdReducer= createReducer(
       return adapter.addOne(ad, state);
     }),
     on(LActions.updateAdSeccess, (state:lightingAdState,{ad})=>{
+
       return adapter.updateOne(
         {
           id: ad.id,
@@ -71,6 +72,7 @@ export const lightingAdReducer= createReducer(
               description: ad.description,
               brand: ad.brand,
               price: ad.price,
+              category:ad.category,
               gallery: ad.gallery,
             },
           },state

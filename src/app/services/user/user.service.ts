@@ -13,7 +13,7 @@ export class UserService {
 
   login(email:string,password:string)
   {
-    console.log('Sending login request to server');
+    
     return this.httpClient.post<LoginUser>(`${environment.api}/user/login`, {
       email,
       password,

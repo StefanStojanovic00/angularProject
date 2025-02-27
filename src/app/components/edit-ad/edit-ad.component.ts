@@ -60,6 +60,7 @@ export class EditAdComponent implements OnInit {
 
       if(this.ad)
       {
+
         this.title = this.ad.title;
         this.price = this.ad.price;
         this.brand = this.ad.brand;
@@ -93,13 +94,15 @@ export class EditAdComponent implements OnInit {
         }
       });
     }
-
+ 
     formData.append('id', String(this.ad?.id));
     formData.append('title', this.title);
     formData.append('price', String(this.price));    
     formData.append('brand', this.brand);
     formData.append('description', this.description);
-    formData.append('categoryId', String(this.selectedCategory));
+    formData.append('categoryID', String(this.selectedCategory));
+
+    
 
     this.store.dispatch(updateAd({ formData }));
 

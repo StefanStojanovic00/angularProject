@@ -47,7 +47,7 @@ export class lightingAdEffects
           return LActions.createAdSuccess({ ad: lAd });
     }),
     catchError(({error})=>{
-        console.log(error.message);
+        
         this.snackBar.open(
           'Greška na strani servera',
           'Zatvori',
@@ -64,7 +64,7 @@ export class lightingAdEffects
         mergeMap(()=>
         this.LightingAdService.getByUser().pipe(
             map((ads:lightingAd[])=>{
-              console.log('uso');
+             
                 return LActions.loadMyAdsSuccess({ads});
             }),
             catchError(({error})=>

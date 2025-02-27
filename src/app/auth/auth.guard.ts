@@ -19,21 +19,17 @@ export const AuthGuard: CanActivateFn = async (route:ActivatedRouteSnapshot, sta
   const authorizedRole = route.data['role'];
   const jwtHelper=new JwtHelperService();
   const store= inject(Store<AppState>);
-  console.log('radIM');
+
  
   function getFromUserStore():User |null {
     let user: User | null = null;
       
     store.select(selectUser).subscribe((user2) => {
           user = user2.user;  
-          console.log('auth',user);
+
         });
     
-    /*  store.subscribe((st)=>{
-        user=st.user.user;
-        console.log('auth',user);
-      })*/
-      
+ 
       return user;
   }
 
@@ -42,13 +38,13 @@ export const AuthGuard: CanActivateFn = async (route:ActivatedRouteSnapshot, sta
   {
     if(jwtHelper.isTokenExpired(token))
     {
-      console.log('uso 1');
+
       router.navigate(['login']);
       return false;
     }
     if(!user)
       {
-        console.log('uso 2');
+
         router.navigate(['login']);
     
         return false;
@@ -56,15 +52,15 @@ export const AuthGuard: CanActivateFn = async (route:ActivatedRouteSnapshot, sta
     
       if(authorizedRole!==user.type && user.type!=Role.Admin)
       {
-        console.log('uso 3');
+
         router.navigate(['login']);
     
         return false;
       }
-      console.log('uso 4');
+
       return true;
   } else{
-    console.log('uso 5');
+
     router.navigate(['login']);
 
         return false;

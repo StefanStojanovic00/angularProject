@@ -59,7 +59,7 @@ export class NavbarComponent implements OnInit {
       }
     }
     navigate(path: string) {
-      console.log(path);
+
       this.router.navigate([path]);
     }
    

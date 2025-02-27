@@ -57,7 +57,7 @@ export class LightingAdDetailsComponent implements OnInit {
 
       this.ad=item;
     });
-    console.log('liAd',this.ad?.gallery);
+
     this.store.select(selectUser).subscribe((user) => {
          this.user = user.user;  
        });
@@ -77,8 +77,8 @@ export class LightingAdDetailsComponent implements OnInit {
         this.router.navigate(['edit-ad/'+this.ad?.id]);
       }
       handleSave() {
-        if (this.ad !== undefined && this.ad !== null)
-          this.store.dispatch(toggleSaveAd({ adId: Number(this.ad.id) }));
+            if (this.ad !== undefined && this.ad !== null)
+            this.store.dispatch(toggleSaveAd({ adId: Number(this.ad.id) }));
       }
   
 }
