@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditProfilComponent } from '../edit-profil/edit-profil.component';
 import { environment } from '../../../enviroments/enviroment';
 import { userEdit } from '../../store/user/user.actions';
+import { selectUser } from '../../store/user/user.selector';
 
 @Component({
   selector: 'app-my-ads',
@@ -35,9 +36,9 @@ export class MyAdsComponent implements OnInit {
      
           (this.ads=ads));*/
     this.store.dispatch(loadMyAds());
-    this.store.subscribe((state) => {
-      this.user = state.user.user;
-    });
+    this.store.select(selectUser).subscribe((user) => {
+            this.user = user.user;  
+          });
   }
 
   handleEdit() {

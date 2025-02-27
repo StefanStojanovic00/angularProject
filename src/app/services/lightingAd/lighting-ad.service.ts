@@ -29,7 +29,7 @@ export class LightingAdService {
     return this.httpClient.get<lightingAd>(`${environment.api}/lighting-ad/${id}`);
   }
   getByUserSaved() {
-    return this.httpClient.get<lightingAd[]>(`${environment.api}/lighting-ad/savedAds`);
+    return this.httpClient.get<lightingAd[]>(`${environment.api}/lighting-ad/saveAds`);
   }
 
   getBySearch(input:string,categoryId:string)

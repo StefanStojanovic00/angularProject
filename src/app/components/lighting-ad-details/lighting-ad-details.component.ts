@@ -19,6 +19,7 @@ import { ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { selectUser } from '../../store/user/user.selector';
+import { ConfDialogComponent } from '../conf-dialog/conf-dialog.component';
 
 @Component({
   selector: 'app-lighting-ad-details',
@@ -56,6 +57,7 @@ export class LightingAdDetailsComponent implements OnInit {
 
       this.ad=item;
     });
+    console.log('liAd',this.ad?.gallery);
     this.store.select(selectUser).subscribe((user) => {
          this.user = user.user;  
        });
@@ -75,22 +77,8 @@ export class LightingAdDetailsComponent implements OnInit {
         this.router.navigate(['edit-ad/'+this.ad?.id]);
       }
       handleSave() {
-          if(!this.ad) return;
-
-         const confDialogRef= this.confDialog.open(Component,{
-          height:'auto',
-          width:'auto',
-          data:{
-            message:'Da li ste sigurni da zelite da obriste oglas?'
-          },
-         });
-
-         confDialogRef.afterClosed().subscribe((res)=>{
-          if (!res || !res.result || !this.ad) return;
-
-          if(this.user?.id === this.ad.createdBy?.id)
-            this.store.dispatch(deleteAd({adId:Number(this.ad.id)}));
-         })
+        if (this.ad !== undefined && this.ad !== null)
+          this.store.dispatch(toggleSaveAd({ adId: Number(this.ad.id) }));
       }
   
 }

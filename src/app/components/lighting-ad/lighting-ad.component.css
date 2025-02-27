@@ -1,40 +1,170 @@
+/* Main card container */
 .cont-card {
     display: flex;
-    width: 600px;
-    height: 300px;
-    padding: 0px;
-
-    margin: 10px;
-}
-.header-div {
+    width: 100%;
+    max-width: 500px; /* Limit width to 600px */
+    height: auto;
+    margin: 20px auto; /* Center align and give spacing */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background-color: #ffffff;
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
+  }
+  
+  /* Hover effect on the whole card */
+  .cont-card:hover {
+    transform: translateY(-8px); /* Lift the card slightly */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+  }
+  
+  /* Image container */
+  .img-div {
+    width: 40%; /* Adjust to smaller image size */
+    height: 100%;
+    background-color: #f0f0f0; /* Light background for image area */
+    padding: 5px;
+    position: relative;
+    overflow: hidden; /* Prevent image overflow */
+    transition: transform 0.3s ease; /* Smooth hover effect on image */
+  }
+  
+  .img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Smooth zoom effect */
+  }
+  
+  /* Hover effect on image */
+  .img-div:hover .img {
+    transform: scale(1.05); /* Slight zoom on hover */
+  }
+  
+  /* Card body */
+  .add-card {
+    flex-grow: 1;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* Header section: title, category, brand, and price */
+  .header-div {
     display: flex;
     justify-content: space-between;
-}
-.img-div {
-    width: 60%;
-    height: 100%;
-    background-color: grey;
-    margin: 0px;
-    padding: 0px;
-}
-.img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-}
-.add-card {
-    width: 100%;
-}
-.desc-div {
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  
+  .header-div > div:first-child {
+    max-width: 70%; /* Ensure text doesn't overflow */
+  }
+  
+  .mat-card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.4;
+  }
+  
+  .mat-card-subtitle {
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px;
+  }
+  
+  .mat-raised-button {
+    background-color: #3f51b5; /* Blue color for price button */
+    color: white;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth color and scale effect */
+  }
+  
+  .mat-raised-button:hover {
+    background-color: #303f9f; /* Darker blue on hover */
+    transform: scale(1.05); /* Slight grow effect on hover */
+  }
+  
+  /* Divider for separation */
+  mat-divider {
+    margin: 15px 0;
+  }
+  
+  /* Description section */
+  .desc-div {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: space-between;
-    height: 80%;
-}
-.price-div {
+    margin-top: 20px;
+  }
+  
+  .desc-div p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.4;
+    margin: 0;
+    max-height: 80px; /* Limit height of description */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Ellipsis if the description is too long */
+  }
+  
+  button.mat-raised-button[color='accent'] {
+    background-color: #4caf50; /* Green button for "More Info" */
+    color: white;
+    margin-top: auto;
+    align-self: flex-end;
+    padding: 8px 14px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth color and scale effect */
+  }
+  
+  button.mat-raised-button[color='accent']:hover {
+    background-color: #388e3c; /* Darker green on hover */
+    transform: scale(1.05); /* Slight grow effect on hover */
+  }
+  
+  /* Footer (empty, but you can add content) */
+  mat-card-footer {
     display: flex;
-    background-color: #3F51B0;
-    flex-direction: column;
-}
+    justify-content: flex-end;
+    padding: 10px 0;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .cont-card {
+      flex-direction: column;
+      width: 100%;
+      max-width: 100%;
+    }
+  
+    .img-div {
+      width: 100%;
+      height: 200px;
+    }
+  
+    .add-card {
+      padding: 10px;
+    }
+  
+    .header-div {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .mat-card-title {
+      font-size: 16px;
+    }
+  
+    .mat-card-subtitle {
+      font-size: 12px;
+    }
+  }
+  

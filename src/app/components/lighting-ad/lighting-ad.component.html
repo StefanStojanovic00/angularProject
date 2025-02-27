@@ -19,7 +19,7 @@
           >
         </div>
         <div>
-          <button mat-raised-button color="primary">{{ ad?.price + "€" }}</button>
+          <button mat-raised-button color="primary" style="margin: 10px; ">{{ ad?.price + "€" }}</button>
         </div>
       </div>
       <mat-divider></mat-divider>
@@ -27,7 +27,7 @@
         <p style="margin-top: 30px">
           {{ ad?.description }}
         </p>
-        <button mat-raised-button color="accent" style="align-self: flex-end" (click)="Details()">
+        <button mat-raised-button color="accent" style="align-self: flex-end; margin-bottom: 2%;" (click)="Details()">
           Više informacija
         </button>
       </mat-card-content>

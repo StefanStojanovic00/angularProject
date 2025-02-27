@@ -17,10 +17,11 @@ import { MatInputModule } from '@angular/material/input';
 import { searchedAds } from '../../store/lighting-ad/lighting-ad.actions';
 import {MatChipsModule} from '@angular/material/chips';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-toolbar',
-  imports: [CommonModule,ReactiveFormsModule,MatChipsModule,MatIconModule,MatInputModule,MatOptionModule, MatCardModule,MatFormFieldModule,MatSelectModule,FontAwesomeModule,NgFor],
+  imports: [CommonModule,ReactiveFormsModule,MatChipsModule,MatIconModule,MatInputModule,MatOptionModule, MatCardModule,MatFormFieldModule,MatSelectModule,FontAwesomeModule,NgFor,MatButtonModule],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.css',
 })

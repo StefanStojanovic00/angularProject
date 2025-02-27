@@ -64,6 +64,7 @@ export class lightingAdEffects
         mergeMap(()=>
         this.LightingAdService.getByUser().pipe(
             map((ads:lightingAd[])=>{
+              console.log('uso');
                 return LActions.loadMyAdsSuccess({ads});
             }),
             catchError(({error})=>
