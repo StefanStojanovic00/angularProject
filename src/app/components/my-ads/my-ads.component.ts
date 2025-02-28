@@ -32,9 +32,7 @@ export class MyAdsComponent implements OnInit {
   
   
   ngOnInit(): void {
-  /*  this.store.select(selectAdsList ).subscribe((ads)=>
-     
-          (this.ads=ads));*/
+ 
     this.store.dispatch(loadMyAds());
     this.store.select(selectUser).subscribe((user) => {
             this.user = user.user;  

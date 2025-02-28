@@ -33,12 +33,9 @@ export const appConfig: ApplicationConfig = {
         multi: true,
     },
     provideAnimations(),
-    //provideState({name:FeatureKey,reducer:userReducer}),
     provideEffects([UserEffects, lightingAdEffects, CategoryEffects]),
     provideStore(reducers),
-   // importProvidersFrom(RouterModule.forRoot(routes)),
     ...appStateProviders,
-    //importProvidersFrom(StoreModule.forRoot(reducersS)),
     provideHttpClient(withInterceptorsFromDi()),
   provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })]
 };

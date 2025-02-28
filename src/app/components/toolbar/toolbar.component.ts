@@ -18,6 +18,7 @@ import { searchedAds } from '../../store/lighting-ad/lighting-ad.actions';
 import {MatChipsModule} from '@angular/material/chips';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { selectUser } from '../../store/user/user.selector';
 
 @Component({
   selector: 'app-toolbar',
@@ -32,7 +33,7 @@ export class ToolbarComponent implements OnInit {
   user: User | null = null;
   categories: Category[] | null = null;
 
-  //input:string='';
+  
     input = new FormControl(''); 
   
   category=new FormControl();
@@ -42,14 +43,13 @@ export class ToolbarComponent implements OnInit {
   ngOnInit(): void {
 
 
-    this.store.subscribe((state) => {
-      this.user = state.user.user;
-    
-    });
+     this.store.select(selectUser).subscribe((user) => {
+                this.user = user.user;  
+              });
     this.store.select(selectCategoryList ).subscribe((categories)=>
      
           (this.categories=categories));
-          //this.store.dispatch(loadCategories());
+         
   }
 
   

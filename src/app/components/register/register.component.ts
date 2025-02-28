@@ -13,6 +13,7 @@ import { Store } from '@ngrx/store';
 import { RegisterUser } from '../../models/user';
 import { registerUser } from '../../store/user/user.actions';
 import { AppState } from '../../app.state';
+import { selectUser } from '../../store/user/user.selector';
 
 @Component({
   selector: 'app-register',
@@ -33,10 +34,10 @@ export class RegisterComponent implements OnInit {
 
   constructor(private store:Store<AppState>,private router:Router){}
   ngOnInit(): void {
-    this.store.subscribe((state)=>
-      {
-        this.loading=state.user.loading;
-      });
+     this.store.select(selectUser).subscribe((user) => {
+              this.loading = user.loading; 
+           
+            });
   }
 
   navigate() {

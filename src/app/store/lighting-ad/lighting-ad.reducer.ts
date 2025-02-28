@@ -15,7 +15,7 @@ export interface lightingAdState extends EntityState<lightingAd>
 export const adapter: EntityAdapter<lightingAd> = createEntityAdapter<lightingAd>();
 
 export const initialState: lightingAdState = adapter.getInitialState({
-    // additional entity state properties
+    
     category: null,
     loading:false,
   });

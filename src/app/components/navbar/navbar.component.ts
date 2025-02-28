@@ -17,6 +17,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { selectUser } from '../../store/user/user.selector';
 @Component({
   selector: 'app-navbar',
   imports: [CommonModule,MatIconModule,FontAwesomeModule,MatCardModule,MatMenuModule,MatToolbarModule,NgIf,MatButtonModule ],
@@ -40,7 +41,9 @@ export class NavbarComponent implements OnInit {
       this.store.dispatch(loadCategories());
       
        
-      this.store.subscribe((state) => (this.user = state.user.user));
+     this.store.select(selectUser).subscribe((user) => {
+                this.user = user.user;  
+              });
        this.store.select(selectCategoryList).subscribe((categories)=>
         (this.categories=categories));
 

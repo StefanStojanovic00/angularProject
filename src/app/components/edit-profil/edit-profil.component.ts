@@ -42,8 +42,7 @@ export class EditProfilComponent implements OnInit {
 
 
   ngOnInit(): void {
-   /* this.store.subscribe((state)=>{
-      this.user=state.user.user;*/
+
       this.store.select(selectUser).subscribe((user) => {
             this.user = user.user;  
           });

@@ -78,26 +78,25 @@ export class CreateAdComponent implements OnInit{
     
      this.store.select(selectUser).subscribe((user) => {
           this.user = user.user; 
-          console.log('🔵 User data loaded:', this.user);  
+          
         });
 
     this.store.select(selectCategoryList).subscribe((categories)=>
       (this.categories=categories));
     
-    console.log('🔵 Categories loaded:', this.categories);
+   
     
 
     if (this.categoryControl.value === null && this.categories.length > 0) {
-      console.log('🔵 Categories loaded 0:', this.categories[0].id);
+      
       this.categoryControl.setValue(this.categories[0].id);
     };
 
     this.categoryControl.valueChanges.subscribe((value) => {
-    console.log('📌 Izabrana kategorija ID:', value);
+    
       });
 
-      console.log('Category Control Valid:', this.categoryControl.valid);
-    console.log('Data Form Group Valid:', this.dataFormGroup.valid);
+      
   }
   
 
@@ -106,7 +105,7 @@ export class CreateAdComponent implements OnInit{
       this.selectedFiles = event.target.files;
   
 
-     console.log('📸 Selected files:', this.selectedFiles);
+     
 
       if (this.selectedFiles && this.selectedFiles[0]) {
         const numberOfFiles = this.selectedFiles.length;
@@ -116,7 +115,7 @@ export class CreateAdComponent implements OnInit{
           reader.onload = (e: any) => {
             
             this.previews.push(e.target.result);
-            console.log('🖼️ File preview added:', e.target.result);
+            
           };
   
           reader.readAsDataURL(this.selectedFiles[i]);
@@ -124,7 +123,7 @@ export class CreateAdComponent implements OnInit{
           this.selectedFileNames.push(this.selectedFiles[i].name);
         }
       }
-      console.log('📸 Updated previews:', this.previews);
+      
     }
 
   drop(event: CdkDragDrop<any,any,any>) {
@@ -137,10 +136,10 @@ export class CreateAdComponent implements OnInit{
     refresh() {
       if (this.previews.length > 0) {
         this.sliderPrev = this.previews;
-        console.log('🔄 Slider updated with previews:', this.sliderPrev);
+        
       } else {
         this.sliderPrev[0] = '../../../assets/noImage.png';
-        console.log('🔄 No images found, setting default image.');
+       
       }
       }
       
@@ -154,7 +153,7 @@ export class CreateAdComponent implements OnInit{
           for (let i = 0; i < this.selectedFiles.length; i++) {
             if (img == this.selectedFiles[i].name)
               formData.append('images', this.selectedFiles[i]);
-            console.log('📤 Added image to FormData:', this.selectedFiles[i]);
+          
           }
         });
 
@@ -173,17 +172,17 @@ export class CreateAdComponent implements OnInit{
           formData.append('categoryId', <string>this.categoryControl.value);
           formData.append('description', this.dataFormGroup.controls['descControl'].value!);
       
-  console.log('🚀 Dispatching createAd with FormData:', formData);
+  
           this.store.dispatch(createAd({ formData }));
           
       }
       
       removeImg(value: string) {
         const index: number = Number(value);
-        console.log('❌ Removing image at index:', index);
+        
       this.previews.splice(index, 1);
       this.selectedFileNames.splice(index, 1);
 
-  console.log('✅ Updated previews after removal:', this.previews);
+  
         }
 }

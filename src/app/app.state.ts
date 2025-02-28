@@ -11,10 +11,3 @@ export interface AppState{
 }
 
 
-/*export const reducersS: ActionReducerMap<AppState> = {
-        user:userReducer,
-        lightingAd:lightingAdReducer,
-        category:categoryReducer,
-    
-  };*/
-  

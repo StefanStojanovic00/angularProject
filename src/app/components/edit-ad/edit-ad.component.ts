@@ -50,7 +50,7 @@ export class EditAdComponent implements OnInit {
 
 
     this.store.dispatch(loadOneAd({adId:this.adId}));
-    //this.store.dispatch(loadCategories());
+    
     this.store.select(selectCategoryList ).subscribe((categories)=>
      (this.categories=categories));
 
